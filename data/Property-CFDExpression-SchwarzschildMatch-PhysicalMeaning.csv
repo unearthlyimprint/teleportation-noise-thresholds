@@ -1,0 +1,6 @@
+"Property","CFD Expression","Schwarzschild Match","Physical Meaning"
+"Throat radius","r0=lPϕ0e−αγr_0 = l_P\sqrt{\phi_0}e^{-\alpha\gamma}r0=lPϕ0e−αγ","rs=2GM/c2r_s = 2GM/c^2rs=2GM/c2","Geometric scale set by coherence"
+"Mass","M=mP2ϕ0e−αγM = \frac{m_P}{2}\sqrt{\phi_0}e^{-\alpha\gamma}M=2mPϕ0e−αγ","Planck-scale for γ_crit","Coherence → gravitational mass"
+"Temperature","T=R−1∝e+αγT = R^{-1} \propto e^{+\alpha\gamma}T=R−1∝e+αγ","TH=ℏc3/(8πGMkB)T_H = \hbar c^3/(8\pi GMk_B)TH=ℏc3/(8πGMkB)","Information scrambling rate"
+"Entropy","S≈Nln⁡dS \approx N \ln dS≈Nlnd","SBH=πrs2/lP2S_{BH} = \pi r_s^2/l_P^2SBH=πrs2/lP2","Degrees of freedom"
+"Traversal time","Δt∝e3αγ/2\Delta t \propto e^{3\alpha\gamma/2}Δt∝e3αγ/2","Light-crossing:2πrs/c2\pi r_s/c2πrs/c","Information transfer delay"

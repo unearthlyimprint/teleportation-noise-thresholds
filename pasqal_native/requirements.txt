@@ -1,0 +1,5 @@
+pulser==1.7.0
+pasqal-cloud>=0.20.0
+numpy
+matplotlib
+scipy

@@ -1,0 +1,65 @@
+[
+  {
+    "gamma": 0.05,
+    "device": "EMU_FREE",
+    "batch_id": null,
+    "status": "ERROR",
+    "error": "build_wormhole_sequence() got an unexpected keyword argument 'use_fresnel_layout'"
+  },
+  {
+    "gamma": 0.05,
+    "device": "EMU_SV",
+    "batch_id": null,
+    "status": "ERROR",
+    "error": "build_wormhole_sequence() got an unexpected keyword argument 'use_fresnel_layout'"
+  },
+  {
+    "gamma": 0.05,
+    "device": "EMU_FRESNEL",
+    "batch_id": null,
+    "status": "ERROR",
+    "error": "build_wormhole_sequence() got an unexpected keyword argument 'use_fresnel_layout'"
+  },
+  {
+    "gamma": 0.2,
+    "device": "EMU_FREE",
+    "batch_id": null,
+    "status": "ERROR",
+    "error": "build_wormhole_sequence() got an unexpected keyword argument 'use_fresnel_layout'"
+  },
+  {
+    "gamma": 0.2,
+    "device": "EMU_SV",
+    "batch_id": null,
+    "status": "ERROR",
+    "error": "build_wormhole_sequence() got an unexpected keyword argument 'use_fresnel_layout'"
+  },
+  {
+    "gamma": 0.2,
+    "device": "EMU_FRESNEL",
+    "batch_id": null,
+    "status": "ERROR",
+    "error": "build_wormhole_sequence() got an unexpected keyword argument 'use_fresnel_layout'"
+  },
+  {
+    "gamma": 0.4,
+    "device": "EMU_FREE",
+    "batch_id": null,
+    "status": "ERROR",
+    "error": "build_wormhole_sequence() got an unexpected keyword argument 'use_fresnel_layout'"
+  },
+  {
+    "gamma": 0.4,
+    "device": "EMU_SV",
+    "batch_id": null,
+    "status": "ERROR",
+    "error": "build_wormhole_sequence() got an unexpected keyword argument 'use_fresnel_layout'"
+  },
+  {
+    "gamma": 0.4,
+    "device": "EMU_FRESNEL",
+    "batch_id": null,
+    "status": "ERROR",
+    "error": "build_wormhole_sequence() got an unexpected keyword argument 'use_fresnel_layout'"
+  }
+]

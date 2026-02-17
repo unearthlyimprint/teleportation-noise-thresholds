@@ -1,0 +1,8 @@
+gamma,survival_prob,phase
+0.0,1.0,Traversable
+0.2,0.65,Traversable
+0.4,0.09,Collapsed
+0.5,0.0,Collapsed
+0.535,0.01,Critical
+0.6,0.09,Collapsed
+0.8,0.65,Traversable

@@ -1,0 +1,23 @@
+[
+  {
+    "gamma": 0.0,
+    "job_id": "f577074c-0b3c-11f1-ae91-60ff9e7eb880",
+    "counts": null,
+    "status": "JobStatus.FAILED",
+    "error": "{'code': '400', 'message': \"{'inputDataUri': ['Failed to download or parse sequence. value_error.missing: field required']}\"}"
+  },
+  {
+    "gamma": 0.535,
+    "job_id": "f8292e70-0b3c-11f1-ae91-60ff9e7eb880",
+    "counts": null,
+    "status": "JobStatus.FAILED",
+    "error": "{'code': '400', 'message': \"{'inputDataUri': ['Failed to download or parse sequence. value_error.missing: field required']}\"}"
+  },
+  {
+    "gamma": 0.8,
+    "job_id": "f9275a72-0b3c-11f1-ae91-60ff9e7eb880",
+    "counts": null,
+    "status": "JobStatus.FAILED",
+    "error": "{'code': '400', 'message': \"{'inputDataUri': ['Failed to download or parse sequence. value_error.missing: field required']}\"}"
+  }
+]

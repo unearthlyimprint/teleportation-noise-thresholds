@@ -1,0 +1,8 @@
+azure-quantum
+azure-identity
+pulser-core
+pulser-simulation
+qiskit
+numpy
+matplotlib
+qutip

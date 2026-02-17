@@ -1,0 +1,18 @@
+# Core scientific computing
+numpy>=2.0
+scipy>=1.12
+matplotlib>=3.8
+
+# Quantum computing — Azure / IonQ
+azure-quantum>=2.0
+qsharp>=1.0
+
+# Quantum computing — Pasqal
+pulser>=1.0
+pasqal-cloud>=0.20
+
+# Local quantum simulation
+qutip>=5.0
+
+# Utilities
+python-dotenv>=1.0

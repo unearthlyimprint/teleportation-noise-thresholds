@@ -1,0 +1,20 @@
+[
+  {
+    "gamma": 0.0,
+    "job_id": "6f43ecf0-0b30-11f1-a0d1-60ff9e7eb880",
+    "counts": null,
+    "status": "Failed"
+  },
+  {
+    "gamma": 0.535,
+    "job_id": "7208d658-0b30-11f1-a0d1-60ff9e7eb880",
+    "counts": null,
+    "status": "Failed"
+  },
+  {
+    "gamma": 0.8,
+    "job_id": "7307ca6e-0b30-11f1-a0d1-60ff9e7eb880",
+    "counts": null,
+    "status": "Failed"
+  }
+]

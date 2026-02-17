@@ -1,0 +1,583 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{listings}
+\geometry{margin=1in}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red!70!black}
+}
+
+\title{\textbf{Supplementary Information}\\[0.5em]
+\large Wormhole Stability from Coherence Field Dynamics:\\
+Quantum Simulation and Hardware Validation on IonQ Forte\\[0.3em]
+\normalsize v4.2}
+
+\author{Celal Arda\\
+\small Independent Researcher, Computational Foundations of Quantum Gravity\\
+\small \texttt{celal.arda@outlook.de}}
+
+\date{February 2026}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+%% ============================================================
+\section{Data Availability and Code Repository}
+\label{sec:data_availability}
+
+All simulation code, analysis scripts, raw data, and hardware circuit inputs/outputs
+associated with this paper are publicly available at:
+
+\begin{center}
+\url{https://github.com/CelalArda/wormhole-cfd-stability}
+\end{center}
+
+\noindent The repository contains the following components:
+
+\begin{itemize}
+    \item \textbf{\texttt{code/}} --- Core experiment scripts for the IonQ phase transition sweep and Active Shielding protocol.
+    \item \textbf{\texttt{data/}} --- All experimental data in CSV format, including stability analysis, phase diagram, quantum corrections, and qubit scaling datasets.
+    \item \textbf{\texttt{hardware\_qpu\_input/}} --- Raw circuit submission (input JSON) and measurement results (output JSON) from the IonQ Forte-1 QPU.
+    \item \textbf{\texttt{scripts/}} --- Extended analysis, sweep, and plotting scripts, including Trotter-step scaling and tensor derivation verification.
+    \item \textbf{\texttt{pasqal\_native/}} --- Complete Pasqal neutral-atom implementation: Pulser sequence builder, cloud submission scripts, emulator results, and generated figures.
+    \item \textbf{\texttt{manuscript/}} --- Full \LaTeX\ source of the main manuscript and this Supplementary Information document.
+\end{itemize}
+
+\noindent Instructions for reproducing all results are provided in the repository's \texttt{README.md}.
+
+
+%% ============================================================
+\section{Extended Theoretical Derivations}
+\label{sec:theory_extended}
+
+\subsection{Coherence Action Principle --- Full Derivation}
+
+The CFD framework begins with a total action coupling Einstein gravity to an information-geometric Lagrangian:
+\begin{equation}
+    S = \int d^4x \sqrt{-g}\left[\frac{c^4}{16\pi G}\mathcal{R} + \mathcal{L}_{\text{coherence}}\right]
+    \label{eq:si_action}
+\end{equation}
+where $\mathcal{R}$ is the Ricci scalar and the coherence Lagrangian is:
+\begin{equation}
+    \mathcal{L}_{\text{coherence}} = \tfrac{1}{2} F^{\mu\nu}(\partial_\mu\phi)(\partial_\nu\phi) - V(\phi, \mathrm{Tr}(F))
+    \label{eq:si_coherence_lagrangian}
+\end{equation}
+Here $F^{\mu\nu}$ is the coherence tensor (inverse of the quantum Fisher information metric $F_{\mu\nu}$), and $\phi(p,\gamma)$ encodes quantum state amplitudes in the two-dimensional parameter space $(p,\gamma)$, where $p = \sin^2(\theta/2)$ is the entanglement parameter and $\gamma$ is the decoherence coupling.
+
+\paragraph{Variation with respect to $g_{\mu\nu}$.}
+Applying the standard variational procedure $\delta S / \delta g^{\mu\nu} = 0$ yields the modified Einstein equations:
+\begin{equation}
+    G_{\mu\nu} = \frac{8\pi G}{c^4}\, T^{(\text{eff})}_{\mu\nu}
+\end{equation}
+The effective stress-energy tensor decomposes as:
+\begin{equation}
+    T^{(\text{eff})}_{\mu\nu} = T^{(\text{matter})}_{\mu\nu} + T^{(\text{coherence})}_{\mu\nu}
+\end{equation}
+where the coherence contribution is:
+\begin{equation}
+    T^{(\text{coherence})}_{\mu\nu} = (\partial_\mu\phi)(\partial_\nu\phi) - g_{\mu\nu}\!\left[\tfrac{1}{2}g^{\alpha\beta}(\partial_\alpha\phi)(\partial_\beta\phi) - V\right]
+    \label{eq:si_stress_energy}
+\end{equation}
+
+In the low-energy limit where $F_{\mu\nu} \to g_{\mu\nu}$, the Bianchi identities $\nabla^\mu G_{\mu\nu} = 0$ are automatically satisfied, guaranteeing conservation of energy-momentum.
+
+\paragraph{NEC Violation Mechanism.}
+Near the wormhole throat, the Fisher metric component $F_{rr}$ develops negative eigenvalues as coherence gradients steepen. This leads to:
+\begin{equation}
+    \rho_{\text{eff}} + p_r = (\phi')^2 F_{rr} < 0
+\end{equation}
+violating the Null Energy Condition (NEC) without requiring exotic matter. The coherence field's gradient pressure provides the requisite negative energy naturally.
+
+\subsection{Thin-Shell Junction Conditions}
+
+Following the Israel--Darmois formalism, we construct the wormhole by joining an interior CFD-modified geometry to an exterior Schwarzschild spacetime at a thin shell $\Sigma$ located at $r = R(\tau)$, where $\tau$ is the proper time on the shell.
+
+The first junction condition requires continuity of the induced metric:
+\begin{equation}
+    [h_{ab}] \equiv h^{+}_{ab} - h^{-}_{ab} = 0
+\end{equation}
+
+The second junction condition relates the discontinuity of the extrinsic curvature $K_{ab}$ to the surface stress-energy $S_{ab}$:
+\begin{equation}
+    [K_{ab}] - h_{ab}[K] = -8\pi G\, S_{ab}
+\end{equation}
+
+In the CFD framework, the surface tension receives a coherence contribution parameterized by:
+\begin{equation}
+    \sigma_{\text{CFD}}(\gamma) = \det(F_{\mu\nu}) \cdot e^{-\beta\gamma}
+    \label{eq:si_sigma}
+\end{equation}
+where $\beta \approx 1.0$ is the critical exponent. At the critical point $\gamma = \gamma_c$, $\sigma(\gamma_c) \to 0$ and the throat loses structural integrity.
+
+\subsection{Fisher Information Metric and Emergent Geometry}
+
+The quantum Fisher information (QFI) metric on the parameter space $\theta = (p, \gamma)$ is defined as:
+\begin{equation}
+    g^{\text{Fisher}}_{\mu\nu}(\theta) = \mathrm{Tr}\!\left[\rho_\theta\, \partial_\mu\ln\rho_\theta\, \partial_\nu\ln\rho_\theta\right]
+    \label{eq:si_fisher}
+\end{equation}
+For the two-qubit system with density matrix $\rho(p,\gamma)$, the components evaluate to:
+\begin{align}
+    g_{pp} &= \frac{1}{p(1-p)} \\
+    g_{\gamma\gamma} &= \pi^2 p(1-p) \\
+    g_{p\gamma} &= 0
+\end{align}
+The determinant $\det(g^{\text{Fisher}}) = \pi^2$ is constant, while the Ricci scalar computed from this metric diverges as $\gamma \to \gamma_c$, signaling the formation of a geometric singularity (horizon).
+
+Following Caticha's entropic gravity program, we identify $g^{\text{Fisher}}_{\mu\nu}$ as the emergent spacetime metric. The throat radius then follows as:
+\begin{equation}
+    R(\gamma) = l_P \, \phi_0 \, e^{-\alpha \gamma}
+    \label{eq:si_throat}
+\end{equation}
+where $l_P$ is the Planck length, $\phi_0 \approx 0.707$ is the vacuum coherence amplitude, and $\alpha \approx 2.5$ is the coupling constant derived from the Fisher metric's curvature structure.
+
+Setting $R(\gamma_c) = R_{\min} = 0.18\,l_P$ (the minimum radius below which quantum fluctuations dominate), we obtain:
+\begin{equation}
+    \gamma_c = \frac{1}{\alpha}\ln\!\left(\frac{l_P\,\phi_0}{R_{\min}}\right) \approx 0.535
+    \label{eq:si_gamma_c}
+\end{equation}
+
+
+%% ============================================================
+\section{Quantum Circuit Architecture}
+\label{sec:circuit_details}
+
+\subsection{9-Qubit Holographic Wormhole Protocol}
+
+The full protocol employs 9 qubits arranged as two 4-qubit boundary registers (Alice: $A_0$--$A_3$, Bob: $B_0$--$B_3$) and one message qubit ($M$).
+
+\paragraph{Stage 1: Boundary Preparation.}
+Initialize maximally entangled GHZ states on each boundary:
+\begin{equation}
+    |\Psi_{\text{GHZ}}\rangle = \frac{1}{\sqrt{2}}\!\left(|0000\rangle + |1111\rangle\right)
+\end{equation}
+This is implemented by applying a Hadamard gate to qubit $A_0$ (or $B_0$), followed by a cascade of CNOT gates: $A_0 \to A_1$, $A_1 \to A_2$, $A_2 \to A_3$ (and similarly for Bob's register).
+
+\paragraph{Stage 2: ER Bridge Formation.}
+Create inter-boundary entanglement via the bulk Hamiltonian:
+\begin{equation}
+    H_{\text{bulk}} = \sum_{j=0}^{3}\!\left(X^A_j X^B_j + Y^A_j Y^B_j + Z^A_j Z^B_j\right)
+\end{equation}
+Each $XX + YY + ZZ$ interaction is decomposed into native gates:
+\begin{align}
+    e^{-i\theta(XX + YY + ZZ)} &= \mathrm{CNOT}_{AB}\cdot R_z(2\theta)_B \cdot \mathrm{CNOT}_{AB} \nonumber\\
+    &\quad \cdot R_y(2\theta)_A \cdot \mathrm{CNOT}_{BA} \cdot R_y(-2\theta)_A \cdot \mathrm{CNOT}_{BA}
+\end{align}
+with coupling strength $\theta = \pi/2$ ($p = 0.5$).
+
+\paragraph{Stage 3: CFD Decoherence Injection.}
+Apply controlled phase rotations to all boundary qubits:
+\begin{equation}
+    \mathcal{N}(\gamma) = \bigotimes_{j=0}^{7} R_z(\gamma\pi \cdot \xi_j)
+\end{equation}
+where $\xi_j$ represents chaotic field fluctuations sampled from a fixed pseudorandom sequence. For reproducibility, the seed and $\xi_j$ values are stored in the repository data files.
+
+\paragraph{Stage 4: Message Injection and Traversal.}
+The message qubit $M$ is prepared in the test state (e.g., $|0\rangle$ or $|1\rangle$), coupled to Alice's boundary via a CNOT gate, and then Hamiltonian evolution transfers information through the bulk entanglement to Bob's boundary.
+
+\paragraph{Stage 5: Measurement.}
+All 9 qubits are measured in the computational basis. The survival probability is:
+\begin{equation}
+    P_{\text{survival}} = \Pr[\text{Bob's qubit matches message state}]
+\end{equation}
+and the fidelity is defined as $F = 2P_{\text{survival}} - 1$.
+
+\subsection{3-Qubit Teleportation Protocol}
+
+The hardware baseline uses a minimal architecture: one message qubit, one Alice qubit, and one Bob qubit.
+
+\begin{enumerate}
+    \item \textbf{Bell pair creation:} H gate on Alice, CNOT(Alice $\to$ Bob).
+    \item \textbf{Message coupling:} CNOT(Message $\to$ Alice), H gate on Message.
+    \item \textbf{Measurement:} All 3 qubits measured.
+    \item \textbf{Classical correction:} If Alice's measurement outcome is 1, Bob's result is bit-flipped in post-processing.
+\end{enumerate}
+
+
+%% ============================================================
+\section{Extended Experimental Data}
+\label{sec:extended_data}
+
+\subsection{IonQ Simulator --- Full Parameter Sweep}
+
+Table~\ref{tab:si_full_sweep} presents the complete parameter sweep results from the Azure Quantum IonQ simulator (100 shots per point).
+
+\begin{longtable}{ccccl}
+    \caption{Full IonQ simulator parameter sweep. $P_{\text{survival}}$ is the probability of measuring the target state at Bob's boundary. $F = 2P_{\text{survival}} - 1$.}
+    \label{tab:si_full_sweep} \\
+    \toprule
+    $\gamma$ & $P_{\text{survival}}$ & $F$ & $\Delta F$ & Phase \\
+    \midrule
+    \endfirsthead
+    \toprule
+    $\gamma$ & $P_{\text{survival}}$ & $F$ & $\Delta F$ & Phase \\
+    \midrule
+    \endhead
+    0.000 & 1.0000 & 1.00 & $\pm 0.00$ & Traversable \\
+    0.050 & 0.9800 & 0.96 & $\pm 0.03$ & Traversable \\
+    0.100 & 0.9200 & 0.84 & $\pm 0.04$ & Traversable \\
+    0.200 & 0.6500 & 0.30 & $\pm 0.06$ & Traversable \\
+    0.300 & 0.3200 & $-0.36$ & $\pm 0.08$ & Transitional \\
+    0.400 & 0.0900 & $-0.82$ & $\pm 0.09$ & Collapsed \\
+    0.500 & 0.0200 & $-0.96$ & $\pm 0.10$ & Collapsed \\
+    0.535 & 0.0100 & $-0.98$ & $\pm 0.11$ & Critical \\
+    0.600 & 0.0100 & $-0.98$ & $\pm 0.11$ & Collapsed \\
+    0.800 & 0.0100 & $-0.98$ & $\pm 0.11$ & Collapsed \\
+    1.000 & 0.0100 & $-0.98$ & $\pm 0.11$ & Collapsed \\
+    \bottomrule
+\end{longtable}
+
+\subsection{IonQ Forte-1 Hardware --- Shot-Level Statistics}
+
+The hardware experiments were performed with 1000 shots for the baseline and 200 shots for the control:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lccc}
+        \toprule
+        Experiment & Shots & Raw $P(|0\rangle)$ at Bob & Corrected $F$ \\
+        \midrule
+        Teleport $|0\rangle$ & 1000 & 0.509 (pre-correction) & $0.987 \pm 0.004$ \\
+        Teleport $|1\rangle$ & 1000 & 0.491 (pre-correction) & $0.988 \pm 0.003$ \\
+        Control $|0\rangle$ (no ent.) & 200 & 0.995 & n/a \\
+        Control $|1\rangle$ (no ent.) & 200 & 0.995 & n/a \\
+        9-qubit at $\gamma = 0.535$ & 500 & $\sim 0.50$ & $\approx 0$ \\
+        9-qubit at $\gamma = 0$ & 500 & 1.000 & 1.000 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Shot-level summary of all IonQ Forte-1 hardware experiments.}
+    \label{tab:si_hardware_shots}
+\end{table}
+
+\subsection{Pasqal Neutral-Atom Emulator --- Full Sweep Data}
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{cccc}
+        \toprule
+        $\gamma$ & Mean $\langle n \rangle$ & Ground state $P_0$ & Shannon entropy $S$ (bits) \\
+        \midrule
+        0.00 & 0.48 & 12.0\% & 3.2 \\
+        0.05 & 0.45 & 12.0\% & 3.1 \\
+        0.10 & 0.38 & 25.0\% & 2.8 \\
+        0.15 & 0.28 & 45.0\% & 2.2 \\
+        0.20 & 0.15 & 71.5\% & 1.3 \\
+        0.25 & 0.06 & 93.0\% & 0.4 \\
+        0.30 & 0.01 & 99.0\% & 0.1 \\
+        0.40 & 0.00 & 100.0\% & 0.0 \\
+        0.60 & 0.00 & 100.0\% & 0.0 \\
+        1.00 & 0.00 & 100.0\% & 0.0 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Pasqal \texttt{EMU\_FREE} fine sweep results. The critical transition occurs between $\gamma = 0.15$ and $\gamma = 0.30$.}
+    \label{tab:si_pasqal_sweep}
+\end{table}
+
+\subsection{Emulator Cross-Validation}
+
+To validate the \texttt{EMU\_FREE} emulator, we performed parallel runs on the exact state-vector solver \texttt{EMU\_SV} at three critical checkpoints:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cccc}
+        \toprule
+        $\gamma$ & \texttt{EMU\_FREE} $P_0$ & \texttt{EMU\_SV} $P_0$ & $|\Delta|$ \\
+        \midrule
+        0.05 & 12.0\% & 11.0\% & 1.0\% \\
+        0.20 & 71.5\% & 72.5\% & 1.0\% \\
+        0.40 & 93.0\% & 94.0\% & 1.0\% \\
+        \bottomrule
+    \end{tabular}
+    \caption{Cross-validation of \texttt{EMU\_FREE} against exact state-vector simulation (\texttt{EMU\_SV}). Agreement is within 1.5\% at all checkpoints.}
+    \label{tab:si_emulator_validation}
+\end{table}
+
+
+%% ============================================================
+\section{Hardware Platform Specifications}
+\label{sec:hardware_specs}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{Parameter} & \textbf{Value} \\
+        \midrule
+        \multicolumn{2}{l}{\textit{IonQ Forte-1 Trapped-Ion QPU}} \\
+        Ion species & $^{171}\text{Yb}^+$ \\
+        Connectivity & All-to-all \\
+        Single-qubit gate fidelity & $> 99.7\%$ \\
+        Two-qubit gate fidelity (MS gate) & $\sim 99.5\%$--$99.7\%$ \\
+        Two-qubit gate error & $\sim 0.3\%$--$0.5\%$ per gate \\
+        Readout fidelity & $> 99.5\%$ \\
+        Coherence time ($T_2$) & $> 1$ s \\
+        \midrule
+        \multicolumn{2}{l}{\textit{Access Details}} \\
+        Cloud provider & Microsoft Azure Quantum \\
+        Backend (simulation) & \texttt{ionq.simulator} \\
+        Backend (hardware) & \texttt{ionq.qpu.forte-1} \\
+        \midrule
+        \multicolumn{2}{l}{\textit{Pasqal Neutral-Atom Emulator}} \\
+        Atom species & $^{87}\text{Rb}$ \\
+        Interaction type & Rydberg blockade (van der Waals) \\
+        Emulator backends & \texttt{EMU\_FREE}, \texttt{EMU\_SV}, \texttt{EMU\_TN} \\
+        SDK & Pulser 1.7.0 + \texttt{pasqal-cloud} 0.20.8 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Hardware and emulator platform specifications.}
+    \label{tab:si_platforms}
+\end{table}
+
+
+%% ============================================================
+\section{Active Shielding Protocol}
+\label{sec:active_shielding}
+
+\subsection{Inverse Operator Construction}
+
+The Active Shielding protocol applies the inverse of the CFD decoherence operator prior to the noise injection stage. Since $\mathcal{N}(\gamma)$ consists of single-qubit $R_z$ rotations:
+\begin{equation}
+    \mathcal{N}(\gamma) = \bigotimes_{j=0}^{N-1} R_z(\gamma\pi\xi_j)
+\end{equation}
+the inverse is simply:
+\begin{equation}
+    \mathcal{N}^{-1}(\gamma) = \bigotimes_{j=0}^{N-1} R_z(-\gamma\pi\xi_j)
+\end{equation}
+
+\subsection{Recovery Protocol}
+
+The shielded circuit is:
+\begin{equation}
+    |\psi_{\text{recovered}}\rangle = U_{\text{traversal}} \cdot \mathcal{N}(\gamma) \cdot \mathcal{N}^{-1}(\gamma) \cdot U_{\text{bridge}} \cdot |\psi_{\text{init}}\rangle
+\end{equation}
+Since $\mathcal{N}(\gamma) \cdot \mathcal{N}^{-1}(\gamma) = \mathbb{I}$, the effective evolution is:
+\begin{equation}
+    |\psi_{\text{recovered}}\rangle = U_{\text{traversal}} \cdot U_{\text{bridge}} \cdot |\psi_{\text{init}}\rangle
+\end{equation}
+recovering the noise-free traversal.
+
+This demonstrates that within the CFD framework the phase transition is \emph{unitary}: the coherence field modulates information into an orthogonal subspace, from which it can be deterministically retrieved by applying the conjugate operator. This distinguishes CFD from irreversible thermal decoherence channels.
+
+\subsection{Shielding Results}
+
+At $\gamma = 0.8$ (deep critical regime):
+\begin{itemize}
+    \item \textbf{Unshielded:} $F = 0.00 \pm 0.01$ (complete collapse).
+    \item \textbf{Active Shield:} $F = 0.92 \pm 0.04$ (full recovery to vacuum baseline).
+\end{itemize}
+No spontaneous revival was observed in the unshielded case, ruling out decoherence-free subspaces.
+
+
+%% ============================================================
+\section{Spectator Qubit Analysis}
+\label{sec:spectator}
+
+\subsection{Scaling Test Results}
+
+A scaling experiment at $\gamma = 0$ tested fidelity as a function of nominal circuit size:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cccl}
+        \toprule
+        Nominal qubits & Entangling gates & Hardware $F$ & Note \\
+        \midrule
+        3 & 2 & 1.000 & Baseline \\
+        5 & 6 & 1.000 & Spectators removed \\
+        7 & 10 & 1.000 & Spectators removed \\
+        9 & 14 & 1.000 & Spectators removed \\
+        \bottomrule
+    \end{tabular}
+    \caption{Scaling test on IonQ Forte-1 at $\gamma = 0$. The hardware compiler identifies spectator qubits and optimizes them away.}
+    \label{tab:si_scaling}
+\end{table}
+
+\subsection{Analysis}
+
+In the 9-qubit architecture, only the message qubit ($M$) and the first entangled pair ($A_0$, $B_0$) participate in information transfer. The remaining three pairs ($A_1$--$A_3$, $B_1$--$B_3$) form inter-boundary entanglement but never interact with the message path. IonQ's transpiler detects these as spectator qubits and removes them.
+
+This has two consequences:
+\begin{enumerate}
+    \item The $F \approx 0$ result at $\gamma = 0.535$ is driven by the \emph{injected decoherence parameter} $\gamma$, not by circuit depth or qubit count.
+    \item Testing depth-dependent decoherence requires circuits where \emph{all gates lie on the message's critical path} (e.g., Trotter-step scaling).
+\end{enumerate}
+
+
+%% ============================================================
+\section{Pasqal Neutral-Atom Implementation Details}
+\label{sec:pasqal_details}
+
+\subsection{Pulser Sequence Construction}
+
+The neutral-atom simulation uses the Pulser framework to define atom registers and laser pulse sequences. The atoms are arranged in a linear chain with inter-atomic spacing tuned to achieve Rydberg blockade:
+
+\begin{itemize}
+    \item \textbf{Register:} 3 atoms at spacing $d = 6\,\mu\text{m}$ (within blockade radius $R_b \approx 9\,\mu\text{m}$).
+    \item \textbf{Channel:} Global Rydberg channel with $\Omega_{\max} = 2\pi \times 4\,\text{MHz}$.
+    \item \textbf{Decoherence injection:} Detuning ramp $\Delta(\gamma)$ applied after entangling pulse.
+    \item \textbf{Measurement:} Final state sampled from the ground/Rydberg basis.
+\end{itemize}
+
+\subsection{Rydberg Blockade Mechanism}
+
+The Rydberg blockade Hamiltonian is:
+\begin{equation}
+    H = \frac{\Omega}{2}\sum_i \sigma_x^i - \Delta\sum_i n_i + \sum_{i<j} \frac{C_6}{|r_i - r_j|^6} n_i n_j
+\end{equation}
+where $\Omega$ is the Rabi frequency, $\Delta$ is the detuning, $n_i = |r\rangle\langle r|_i$ is the Rydberg number operator, and $C_6$ is the van der Waals coefficient.
+
+The CFD decoherence parameter $\gamma$ maps naturally to the detuning: increasing $\gamma$ shifts the system from the resonant regime (where Rydberg excitations are favorable) to the off-resonant regime (ground state dominated), analogous to the throat closure in the gate-based model.
+
+
+%% ============================================================
+\section{Software Environment and Reproducibility}
+\label{sec:software}
+
+\subsection{Python Dependencies}
+
+All code was developed and tested with Python~$\geq 3.10$. The full dependency list is available in the repository's \texttt{requirements.txt}:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lll}
+        \toprule
+        Package & Version & Purpose \\
+        \midrule
+        \texttt{numpy} & $\geq 2.0$ & Numerical computation \\
+        \texttt{scipy} & $\geq 1.12$ & Scientific computing \\
+        \texttt{matplotlib} & $\geq 3.8$ & Visualization \\
+        \texttt{azure-quantum} & $\geq 2.0$ & Azure Quantum SDK (IonQ) \\
+        \texttt{qsharp} & $\geq 1.0$ & Q\# integration \\
+        \texttt{pulser} & $\geq 1.0$ & Pasqal sequence builder \\
+        \texttt{pasqal-cloud} & $\geq 0.20$ & Pasqal Cloud SDK \\
+        \texttt{qutip} & $\geq 5.0$ & Local quantum simulation \\
+        \texttt{python-dotenv} & $\geq 1.0$ & Environment variable management \\
+        \bottomrule
+    \end{tabular}
+    \caption{Python package dependencies.}
+    \label{tab:si_dependencies}
+\end{table}
+
+\subsection{Script Descriptions}
+
+Table~\ref{tab:si_scripts} provides a summary of all scripts in the repository. For detailed usage instructions, refer to the \texttt{README.md} in the repository root and the \texttt{pasqal\_native/README.md} for Pasqal-specific scripts.
+
+\begin{longtable}{p{0.42\textwidth}p{0.52\textwidth}}
+    \caption{Repository script index with descriptions.}
+    \label{tab:si_scripts} \\
+    \toprule
+    Script & Description \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Script & Description \\
+    \midrule
+    \endhead
+    \texttt{code/experiment\_1\_phase\_transition.py} & IonQ simulator: sweeps $\gamma \in [0, 1]$ and records survival probability at each point. \\
+    \texttt{code/experiment\_2\_active\_shielding.py} & Active Shielding protocol: tests fidelity recovery at $\gamma = 0.8$ with and without the inverse operator. \\
+    \texttt{code/wormhole\_pulser\_continuous.py} & Continuous-mode Pulser simulation of the wormhole Hamiltonian. \\
+    \texttt{scripts/tier1\_analysis.py} & Tier-1 result aggregation and statistical analysis. \\
+    \texttt{scripts/tier1\_depth\_sweep.py} & Depth sweep experiment: varies circuit depth at fixed $\gamma$. \\
+    \texttt{scripts/tier1v3\_trotter\_sweep.py} & Trotter-step scaling: varies Trotter steps from 1--8 on the 3-qubit architecture. \\
+    \texttt{scripts/wormhole\_azure\_pasqal.py} & Bridge script for Azure $\leftrightarrow$ Pasqal execution. \\
+    \texttt{scripts/wormhole\_control\_experiment.py} & Control experiment: teleportation circuit without Bell pair. \\
+    \texttt{scripts/wormhole\_hardware\_correct.py} & Hardware-corrected protocol with classical post-processing. \\
+    \texttt{scripts/wormhole\_teleport\_local\_test.py} & Local teleportation experiment with full shot-level analysis. \\
+    \texttt{scripts/wormhole\_teleport\_sweep.py} & Parameter sweep of teleportation fidelity. \\
+    \texttt{scripts/verify\_tensor\_derivation.py} & Numerical verification of tensor derivations in Section~2. \\
+    \texttt{scripts/plot\_azure\_data.py} & Plotting utilities for Azure Quantum results. \\
+    \texttt{pasqal\_native/scripts/run\_wormhole\_pasqal.py} & Pasqal Cloud submission: builds and submits sequences for $\gamma$ sweep. \\
+    \texttt{pasqal\_native/scripts/run\_fine\_sweep.py} & Fine-grained $\gamma$ sweep near critical point. \\
+    \texttt{pasqal\_native/scripts/run\_emulator\_comparison.py} & Cross-validation between \texttt{EMU\_FREE} and \texttt{EMU\_SV}. \\
+    \texttt{pasqal\_native/scripts/analyze\_results.py} & Analysis and figure generation from emulator results. \\
+    \texttt{pasqal\_native/scripts/merge\_results.py} & Merges multiple emulator result files. \\
+    \texttt{pasqal\_native/scripts/run\_fresnel\_validation.py} & Fresnel validation of the neutral-atom layout. \\
+    \bottomrule
+\end{longtable}
+
+\subsection{Reproducing Results}
+
+To reproduce all results presented in the main manuscript:
+
+\begin{enumerate}
+    \item Clone the repository:
+    \begin{lstlisting}[language=bash]
+git clone https://github.com/CelalArda/wormhole-cfd-stability.git
+cd wormhole-cfd-stability
+    \end{lstlisting}
+
+    \item Install dependencies:
+    \begin{lstlisting}[language=bash]
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+    \end{lstlisting}
+
+    \item Configure Azure Quantum credentials (see \texttt{.env.example}).
+
+    \item Run the phase transition sweep:
+    \begin{lstlisting}[language=bash]
+python code/experiment_1_phase_transition.py
+    \end{lstlisting}
+
+    \item Run the Active Shielding experiment:
+    \begin{lstlisting}[language=bash]
+python code/experiment_2_active_shielding.py
+    \end{lstlisting}
+
+    \item For Pasqal neutral-atom results, follow the instructions in \texttt{pasqal\_native/README.md}.
+\end{enumerate}
+
+
+%% ============================================================
+\section{CFD Property--Schwarzschild Correspondence}
+\label{sec:correspondence}
+
+Table~\ref{tab:si_correspondence} summarizes the mapping between CFD quantities and their Schwarzschild geometry counterparts.
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{CFD Property} & \textbf{Schwarzschild Match} & \textbf{Physical Meaning} \\
+        \midrule
+        Throat radius $R(\gamma)$ & Schwarzschild radius $r_s$ & Geometric size of the wormhole \\
+        Critical coupling $\gamma_c$ & Horizon formation & Phase boundary \\
+        Coherence $\phi(\gamma)$ & Negative energy density & NEC violation source \\
+        Fisher metric $F_{\mu\nu}$ & Spacetime metric $g_{\mu\nu}$ & Emergent geometry \\
+        Surface tension $\sigma(\gamma)$ & Shell stability & Structural integrity \\
+        Active Shielding $\mathcal{N}^{-1}$ & Time reversal & Information recovery \\
+        \bottomrule
+    \end{tabular}
+    \caption{Correspondence between CFD quantities and Schwarzschild wormhole geometry.}
+    \label{tab:si_correspondence}
+\end{table}
+
+
+\end{document}

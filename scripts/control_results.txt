@@ -1,0 +1,14 @@
+Wormhole Control Experiment
+Backend: ionq.qpu.forte-1, Shots: 200
+
+CONTROL Send |0>: {'000': 115, '001': 84}
+  Bob raw: |0>=1.0000, |1>=0.0000
+  Bell: {'00': 115, '01': 0, '10': 84, '11': 0}
+
+CONTROL Send |1>: {'000': 1, '010': 107, '011': 92}
+  Bob raw: |0>=1.0000, |1>=0.0000
+  Bell: {'00': 1, '01': 107, '10': 0, '11': 92}
+
+MAIN EXPERIMENT (previous run, 1000 shots):
+  Send |0> Bob raw: |0>=50.9%, |1>=49.1%, Bell: 4-way uniform
+  Send |1> Bob raw: |0>=51.2%, |1>=48.8%, Bell: 4-way uniform

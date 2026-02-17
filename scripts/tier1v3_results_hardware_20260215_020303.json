@@ -1,0 +1,36 @@
+{
+  "experiment": "Tier 1 v3: Trotter Depth Sweep",
+  "mode": "hardware",
+  "architecture": "3-qubit wormhole, variable Trotter steps",
+  "total_coupling": 0.785,
+  "gamma": 0.0,
+  "timestamp": "2026-02-15T02:03:03.930438",
+  "note": "Same total Hamiltonian evolution, split into N Trotter steps. More steps = more gates = deeper circuit. Noiseless F \u2248 1.0 for all.",
+  "results": [
+    {
+      "n_trotter": 1,
+      "cx_total": 10,
+      "error": "Operation returned an invalid status 'Forbidden'"
+    },
+    {
+      "n_trotter": 2,
+      "cx_total": 16,
+      "error": "Operation returned an invalid status 'Forbidden'"
+    },
+    {
+      "n_trotter": 3,
+      "cx_total": 22,
+      "error": "Operation returned an invalid status 'Forbidden'"
+    },
+    {
+      "n_trotter": 5,
+      "cx_total": 34,
+      "error": "Operation returned an invalid status 'Forbidden'"
+    },
+    {
+      "n_trotter": 8,
+      "cx_total": 52,
+      "error": "Operation returned an invalid status 'Forbidden'"
+    }
+  ]
+}

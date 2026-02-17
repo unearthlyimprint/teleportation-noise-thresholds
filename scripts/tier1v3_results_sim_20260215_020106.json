@@ -1,0 +1,81 @@
+{
+  "experiment": "Tier 1 v3: Trotter Depth Sweep",
+  "mode": "sim",
+  "architecture": "3-qubit wormhole, variable Trotter steps",
+  "total_coupling": 0.785,
+  "gamma": 0.0,
+  "timestamp": "2026-02-15T02:01:06.433397",
+  "note": "Same total Hamiltonian evolution, split into N Trotter steps. More steps = more gates = deeper circuit. Noiseless F \u2248 1.0 for all.",
+  "results": [
+    {
+      "n_trotter": 1,
+      "total_qubits": 3,
+      "cx_total": 10,
+      "circuit_depth": 19,
+      "step_coupling": 0.785,
+      "counts": {
+        "0": 2000
+      },
+      "p_success": 1.0,
+      "fidelity": 1.0,
+      "sigma": 0.0,
+      "shots": 2000
+    },
+    {
+      "n_trotter": 2,
+      "total_qubits": 3,
+      "cx_total": 16,
+      "circuit_depth": 32,
+      "step_coupling": 0.3925,
+      "counts": {
+        "0": 2000
+      },
+      "p_success": 1.0,
+      "fidelity": 1.0,
+      "sigma": 0.0,
+      "shots": 2000
+    },
+    {
+      "n_trotter": 3,
+      "total_qubits": 3,
+      "cx_total": 22,
+      "circuit_depth": 45,
+      "step_coupling": 0.261667,
+      "counts": {
+        "0": 2000
+      },
+      "p_success": 1.0,
+      "fidelity": 1.0,
+      "sigma": 0.0,
+      "shots": 2000
+    },
+    {
+      "n_trotter": 5,
+      "total_qubits": 3,
+      "cx_total": 34,
+      "circuit_depth": 71,
+      "step_coupling": 0.157,
+      "counts": {
+        "0": 2000
+      },
+      "p_success": 1.0,
+      "fidelity": 1.0,
+      "sigma": 0.0,
+      "shots": 2000
+    },
+    {
+      "n_trotter": 8,
+      "total_qubits": 3,
+      "cx_total": 52,
+      "circuit_depth": 110,
+      "step_coupling": 0.098125,
+      "counts": {
+        "0": 2000
+      },
+      "p_success": 1.0,
+      "fidelity": 1.0,
+      "sigma": 0.0,
+      "shots": 2000
+    }
+  ]
+}
