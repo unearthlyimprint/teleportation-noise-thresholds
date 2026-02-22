@@ -1,0 +1,41 @@
+[
+  {
+    "gamma": 0.05,
+    "p0_core": 0.196,
+    "rho_core": 0.13511111111111113,
+    "core_shots": 500,
+    "core_states": 68,
+    "p0_full": 0.002,
+    "rho_full": 0.15,
+    "emu_free_p0": 0.08,
+    "emu_free_rho": 0.201,
+    "delta_p0": 0.116,
+    "noise_ratio": 0.6721945826423439
+  },
+  {
+    "gamma": 0.2,
+    "p0_core": 0.706,
+    "rho_core": 0.03844444444444444,
+    "core_shots": 500,
+    "core_states": 28,
+    "p0_full": 0.408,
+    "rho_full": 0.042090909090909095,
+    "emu_free_p0": 0.72,
+    "emu_free_rho": 0.034,
+    "delta_p0": -0.014000000000000012,
+    "noise_ratio": 1.1307189542483658
+  },
+  {
+    "gamma": 0.4,
+    "p0_core": 0.79,
+    "rho_core": 0.025555555555555554,
+    "core_shots": 500,
+    "core_states": 19,
+    "p0_full": 0.598,
+    "rho_full": 0.023,
+    "emu_free_p0": 0.93,
+    "emu_free_rho": 0.009,
+    "delta_p0": -0.14,
+    "noise_ratio": 2.8395061728395063
+  }
+]
