@@ -135,9 +135,9 @@ def plot_traversability(metrics: dict, output_dir: str):
     ax.axvline(x=0.535, color=C_CRITICAL, ls='--', lw=1.5, alpha=0.8,
                label=r'$\gamma_c = 0.535$ (CFD critical)')
 
-    ax.set_xlabel(r'Decoherence Parameter $\gamma$')
+    ax.set_xlabel(r'Dephasing Strength $\gamma$')
     ax.set_ylabel(r'Mean Rydberg Density $\langle n \rangle$')
-    ax.set_title('Wormhole Traversability — Pasqal EMU_FREE')
+    ax.set_title('Rydberg Excitation vs. Dephasing — Pasqal EMU_FREE')
     ax.legend(loc='upper right', framealpha=0.9)
     ax.set_xlim(-0.05, 1.05)
     ax.set_ylim(bottom=-0.01)
@@ -164,9 +164,9 @@ def plot_collapse(metrics: dict, output_dir: str):
                label=r'$\gamma_c = 0.535$')
     ax.axhline(y=0.5, color='grey', ls=':', lw=1, alpha=0.5)
 
-    ax.set_xlabel(r'Decoherence Parameter $\gamma$')
+    ax.set_xlabel(r'Dephasing Strength $\gamma$')
     ax.set_ylabel(r'Ground State Probability $P_0$')
-    ax.set_title('Wormhole Collapse — Pasqal EMU_FREE')
+    ax.set_title('Fidelity Collapse vs. Dephasing — Pasqal EMU_FREE')
     ax.legend(loc='center right', framealpha=0.9)
     ax.set_xlim(-0.05, 1.05)
     ax.set_ylim(-0.05, 1.05)
@@ -192,7 +192,7 @@ def plot_entropy(metrics: dict, output_dir: str):
     ax.axvline(x=0.535, color=C_CRITICAL, ls='--', lw=1.5, alpha=0.8,
                label=r'$\gamma_c = 0.535$')
 
-    ax.set_xlabel(r'Decoherence Parameter $\gamma$')
+    ax.set_xlabel(r'Dephasing Strength $\gamma$')
     ax.set_ylabel(r'Shannon Entropy $S$ (bits)')
     ax.set_title('State Diversity — Pasqal EMU_FREE')
     ax.legend(loc='upper right', framealpha=0.9)
@@ -256,7 +256,7 @@ def plot_combined(metrics: dict, output_dir: str):
     for a in axes.flat:
         a.grid(True, alpha=0.2)
 
-    fig.suptitle('CFD Wormhole Stability — Pasqal Neutral-Atom Emulation', fontsize=18, y=1.01)
+    fig.suptitle('System Dynamics under Parametric Dephasing — Pasqal Neutral-Atom Emulation', fontsize=18, y=1.01)
     fig.tight_layout()
 
     path = os.path.join(output_dir, 'fig4_combined_panel.pdf')
@@ -287,7 +287,7 @@ def plot_combined(metrics: dict, output_dir: str):
     fig2.colorbar(im, ax=ax, fraction=0.046, pad=0.04).set_label(r'$P(|1\rangle)$')
 
     for a in axes2.flat: a.grid(True, alpha=0.2)
-    fig2.suptitle('CFD Wormhole Stability — Pasqal Neutral-Atom Emulation', fontsize=18, y=1.01)
+    fig2.suptitle('System Dynamics under Parametric Dephasing — Pasqal Neutral-Atom Emulation', fontsize=18, y=1.01)
     fig2.tight_layout()
     fig2.savefig(png_path)
     plt.close(fig2)
