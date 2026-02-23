@@ -279,7 +279,7 @@
 			9 & 14 & 1.000 & Spectators removed \\
 			\bottomrule
 		\end{tabular}
-		\caption{Scaling test on IonQ Forte-1 at $\gamma = 0$. The hardware compiler identifies spectator qubits and optimizes them away.}
+		\caption{Scaling test on IonQ Forte-1 at $\gamma = 0$. The hardware compiler identifies spectator qubits and optimizes them away. Note: at $\gamma = 0$, the parametric dephasing gates are identity operations, allowing the IonQ compiler to further optimize the nominal 10-CNOT baseline circuit to just 2 effective entangling gates.}
 		\label{tab:si_scaling}
 	\end{table}
 	
