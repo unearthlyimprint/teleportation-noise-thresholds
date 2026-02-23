@@ -30,7 +30,7 @@ An Information-Geometric Framework for Quantum Decoherence\\with Hardware Valida
 \maketitle
 
 \begin{abstract}
-Standard holographic frameworks (AdS/CFT, Ryu-Takayanagi) encode bulk geometry through entanglement entropy alone. We introduce Coherence Field Dynamics (CFD), a theoretical framework in which quantum coherence---the off-diagonal density matrix elements---serves as an independent geometric degree of freedom encoding effective bulk depth, complementary to entanglement's encoding of connectivity. The coherence field $\phi(p,\gamma)$ satisfies a wave equation in information-geometric parameter space, generating a Lorentzian metric $ds^2 = \phi^2(dp^2 - d\gamma^2)$ that degenerates at a critical decoherence threshold $\gamma_c$, creating an information horizon. We derive $\gamma_c \approx 0.535$ from geometric stability analysis and establish a correspondence between MERA tensor network depth and effective decoherence in reduced descriptions. A quantum fidelity-bonding descriptor $F_{\text{bond}}(\gamma)$ connects the framework to molecular orbital theory, bridging quantum information geometry and chemical bonding. We present five testable predictions. Companion experimental work demonstrates a fidelity threshold at $\gamma \approx 0.535$ on the IonQ platform ($F = 0.988 \pm 0.003$ baseline, collapse to $F \approx 0$ under dephasing) and consistency with the dephasing response on Pasqal's FRESNEL\_CAN1 neutral-atom QPU (noise ratio $1.13\times$ at $\gamma = 0.20$). These results are consistent with CFD's predicted critical behavior, though they do not uniquely distinguish CFD from standard noise models. Four predictions---coherence-depth complementarity, MERA-decoherence correspondence, coherence-modulated entropy scaling, and hardware validation of the reversibility property---remain open and experimentally accessible.
+Standard holographic frameworks (AdS/CFT, Ryu-Takayanagi) encode bulk geometry through entanglement entropy alone. We introduce Coherence Field Dynamics (CFD), a theoretical framework in which quantum coherence---the off-diagonal density matrix elements---serves as an independent geometric degree of freedom encoding effective bulk depth, complementary to entanglement's encoding of connectivity. The coherence field $\phi(p,\gamma)$ satisfies a wave equation in information-geometric parameter space, generating a Lorentzian metric $ds^2 = \phi^2(dp^2 - d\gamma^2)$ that degenerates at a critical decoherence threshold $\gamma_c$, creating an information horizon. We derive $\gamma_c$ from geometric stability analysis and establish a correspondence between MERA tensor network depth and effective decoherence in reduced descriptions. We present five testable predictions. Companion experimental work demonstrates a fidelity threshold at $\gamma \approx 0.535$ on the IonQ platform ($F = 0.988 \pm 0.003$ baseline, collapse to $F \approx 0$ under dephasing) and consistency with the dephasing response on Pasqal's FRESNEL\_CAN1 neutral-atom QPU (noise ratio $1.13\times$ at $\gamma = 0.20$). These results are consistent with CFD's predicted critical behavior, though they do not uniquely distinguish CFD from standard noise models. Four predictions---coherence-depth complementarity, MERA-decoherence correspondence, coherence-modulated entropy scaling, and hardware validation of the reversibility property---remain open and experimentally accessible.
 \end{abstract}
 
 % ============================================================
@@ -59,15 +59,14 @@ Quantum coherence $\phi(p, \gamma)$ parameterizes information geometry such that
 \end{itemize}
 \end{conjecture}
 
-This extension introduces four new elements beyond standard holography:
+This extension introduces three new elements beyond standard holography:
 \begin{enumerate}
     \item A coherence-modulated entropy relation with attenuation function $f(\gamma)$.
     \item An effective MERA-decoherence correspondence in reduced descriptions.
-    \item Critical behavior at a decoherence threshold $\gamma_c$.
-    \item A proposed quantum fidelity-bonding correspondence $F_{\text{bond}}(\gamma)$ bridging information geometry and molecular orbital theory.
+    \item Critical behavior at a decoherence threshold $\gamma_c$, whose specific value depends on the system geometry.
 \end{enumerate}
 
-All four are testable on current quantum hardware.
+All three are testable on current quantum hardware.
 
 % ============================================================
 \section{Theoretical Framework}
@@ -124,7 +123,7 @@ with effective stress-energy:
     T^{(\text{coherence})}_{\mu\nu} = (\partial_\mu\phi)(\partial_\nu\phi) - g_{\mu\nu}\!\left[\tfrac{1}{2}g^{\alpha\beta}(\partial_\alpha\phi)(\partial_\beta\phi) - V\right]
 \end{equation}
 
-\textbf{NEC Violation Mechanism:} Near the throat where $F_{rr}$ develops negative eigenvalues, $\rho_{\text{eff}} + p_r = (\phi')^2 F_{rr} < 0$. Coherence gradients provide negative pressure without exotic matter.
+\textbf{Analogue gravity interpretation:} This variational principle is an \emph{analogue gravity model}, analogous to acoustic metrics in fluid dynamics~\cite{VanRaamsdonk2010}. The constants $c$ and $G$ appearing here are \emph{effective, system-specific parameters} that map the information-geometric structure, not claims that quantum decoherence bends physical 4D spacetime. The 4D integral provides a template for how coherence-sourced stress-energy \emph{would} modify geometry if promoted to a physical field theory; the present work treats this coupling as a formal analogy.
 
 \subsection{Fisher Information Metric}
 
@@ -135,22 +134,11 @@ The quantum Fisher information matrix on parameter space $\theta = (p, \gamma)$ 
 Following Caticha's entropic gravity~\cite{Caticha2005}, the Fisher metric is the emergent spacetime metric. As $\gamma \to \gamma_c$, the Ricci scalar diverges, signaling horizon formation.
 
 % ============================================================
-\section{Quantum Fidelity-Bonding Correspondence}
-\label{sec:fbond}
+% NOTE: The F_bond quantum fidelity-bonding correspondence,
+% which connects information geometry to molecular orbital theory,
+% is developed in a separate dedicated paper. See companion work
+% on molecular systems (13+ systems analyzed).
 % ============================================================
-
-From quantum information theory, Bell state fidelity under decoherence provides an operational measure~\cite{Jozsa1994}. We define a bonding descriptor inspired by molecular orbital overlap integrals~\cite{Pauling1939, Huckel1931}:
-\begin{equation}
-    F_{\text{bond}}(\gamma) = \kappa \cdot S(\rho(\gamma))
-    \label{eq:fbond}
-\end{equation}
-where $\kappa = O_{\text{MOS}} / \log_2 d$ normalizes entanglement entropy $S(\rho)$ for $d$-dimensional systems, and $O_{\text{MOS}}$ is a molecular orbital symmetry overlap integral.
-
-For two-qubit Bell states, $\kappa = 0.922^{1/2} \approx 0.461$ (with $O_{\text{MOS}}$ from Mulliken population analysis of maximally entangled state analogs).
-
-\textit{Physical interpretation:} $F_{\text{bond}}$ bridges quantum information geometry and chemistry. As coherence is lost ($\gamma \to \gamma_c$), $S(\rho)$ saturates and $F_{\text{bond}}$ decreases---the ``bond'' between entangled subsystems weakens. This provides a unified descriptor for both chemical bonding (where $\gamma$ parameterizes orbital correlation) and holographic traversability (where $\gamma$ parameterizes throat stability).
-
-Preliminary computational results on over 13 molecular systems---spanning from single covalent bonds ($F_{\text{bond}} \sim 10^{-4}$) to strongly correlated cluster systems ($F_{\text{bond}} \sim 6.0$)---support the utility of this descriptor. A comprehensive analysis will be presented separately.
 
 % ============================================================
 \section{Holographic Extensions}
@@ -182,8 +170,6 @@ with critical scale $\gamma_c$ determined by geometric stability analysis.
 \end{equation}
 The effective entangling surface area contracts---not due to topology change, but due to reduced information accessibility through coherent channels.
 
-\subsection{Critical Decoherence Threshold}
-
 The critical value $\gamma_c$ emerges from geometric stability requirements. Setting $|\sigma| = \epsilon_{\min}$ (minimal detectable signature) in Eq.~\eqref{eq:sigma}:
 \begin{equation}
     \phi^4(\gamma_c) = \epsilon_{\min}
@@ -193,9 +179,9 @@ For Bell states with decoherence model $\phi(\gamma) = \exp(-\gamma/\gamma_0)$:
     \gamma_c = \gamma_0 \ln\left(\epsilon_{\min}^{-1/4}\right)
     \label{eq:gamma_c}
 \end{equation}
-Numerical analysis with quantum hardware noise floors ($\epsilon_{\min} \sim 10^{-3}$) yields $\gamma_c \approx 0.535$ for trapped-ion systems.
+The framework predicts the \emph{existence} of a geometric threshold $\gamma_c$ at which metric degeneracy occurs and information become inaccessible. The specific numerical value of $\gamma_c$ depends on the system parameters: $\gamma_0$ (the decoherence scale of the physical system) and $\epsilon_{\min}$ (the noise floor).
 
-Experimental results (Section~\ref{sec:validation}) are consistent with this prediction: teleportation fidelity degrades from $F = 0.92$ at $\gamma = 0$ to $F \approx 0$ at $\gamma \approx 0.535$ in simulation, though this behavior is also consistent with the algebraic effect of the injected $R_z$ rotations orthogonalizing the quantum state.
+\textit{Relationship to experimental data:} In the companion teleportation experiment~\cite{Arda2026companion}, fidelity collapses at $\gamma \approx 0.535$. This value is determined by the specific circuit geometry---the $R_z$ rotation angles and distribution coefficients $\xi_j$ that orthogonalize the quantum state at that particular $\gamma$. The CFD framework provides a geometric interpretation of \emph{why} such thresholds occur (metric degeneracy), but the specific threshold value is circuit-dependent, not a universal constant.
 
 \subsection{MERA-CFD Effective Correspondence}
 
@@ -272,7 +258,7 @@ A power-law fit to the fidelity data near the threshold yields an effective expo
 CFD predicts a sharp distinction between entanglement persistence and information accessibility:
 
 \begin{conjecture}[Coherence-Information Decoupling]
-Near $\gamma_c$, quantum correlations (entanglement) can persist while coherence-mediated information transfer ceases. Specifically, $S(\rho) > 0$ while $F_{\text{bond}} \to 0$ at $\gamma = \gamma_c$.
+Near $\gamma_c$, quantum correlations (entanglement) can persist while coherence-mediated information transfer ceases. Specifically, $S(\rho) > 0$ while information accessibility $\to 0$ at $\gamma = \gamma_c$.
 \end{conjecture}
 
 This prediction is supported by numerical simulation at $\gamma = 0.533 \approx \gamma_c$: the metric determinant $|\sigma| = 0.0044$ (near-degenerate), yet quantum fidelity $F = 0.734$ remains super-classical ($F > 0.5$). Coherence and entanglement exhibit distinct scaling behaviors near the critical threshold.
@@ -314,14 +300,14 @@ The dephasing response was independently tested on Pasqal's neutral-atom archite
         \toprule
         \textbf{Experiment} & \textbf{$F$ or $P_0$} & \textbf{Status} \\
         \midrule
-        IonQ 3-qubit teleportation & $F = 0.988$ & Traversable \\
+        IonQ 3-qubit teleportation & $F = 0.988$ & High fidelity \\
         IonQ control (no ent.) & No transfer & Confirmed \\
         IonQ 9-qubit, $\gamma = 0.535$ & $F \approx 0$ & Collapsed \\
         Pasqal QPU, $\gamma = 0.20$ & $P_0 = 70.6\%$ & Near-ideal \\
-        Active Shielding (sim) & $0.00 \to 0.92$ & Recovered \\
+        Conjugate dephasing (sim) & $0.00 \to 0.92$ & Recovered (trivially) \\
         \bottomrule
     \end{tabular}
-    \caption{Summary of experimental validation across platforms. Active Shielding result is simulation-only; all others include hardware data.}
+    \caption{Summary of experimental results across platforms. Conjugate dephasing result is simulation-only ($U^\dagger U = I$); all others include hardware data.}
     \label{tab:hardware}
 \end{table}
 
@@ -346,7 +332,7 @@ At $\gamma = 0.8$, applying the conjugate dephasing operator $\mathcal{D}^{-1}(\
         \midrule
         Info channel & Entanglement only & Ent.\ + Coherence \\
         Geometry & Static surfaces & Parametric \\
-        Observable & $S$ (entropy) & $F_{\text{bond}}$ \\
+        Observable & $S$ (entropy) & $\phi$, $S_{\text{eff}}$ \\
         Bulk evol. & Fixed & $\gamma$-dependent \\
         Testability & Indirect & Direct (hw) \\
         \bottomrule
@@ -403,8 +389,7 @@ Key contributions of this work:
 \begin{enumerate}
     \item \textbf{Theoretical framework:} Coherence field equation, information-geometric metric, and variational principle.
     \item \textbf{Holographic extensions:} Coherence-modulated entropy relation $S_{\text{eff}}(\gamma) = S_0 e^{-\gamma/\gamma_c}$ and MERA-decoherence correspondence $\gamma_{\text{eff}}(k) = \gamma_0 + k \Delta\gamma$.
-    \item \textbf{Cross-domain bridge:} $F_{\text{bond}}(\gamma)$ connects information geometry to chemical bonding theory.
-    \item \textbf{Experimental consistency:} Companion experimental work shows a fidelity threshold at $\gamma \approx 0.535$ on IonQ and a consistent dephasing response on Pasqal FRESNEL\_CAN1 QPU, though these results do not uniquely distinguish CFD from standard noise models.
+    \item \textbf{Experimental consistency:} Companion experimental work shows a fidelity threshold at $\gamma \approx 0.535$ on IonQ and a consistent dephasing response on Pasqal FRESNEL\_CAN1 QPU, though these results do not uniquely distinguish CFD from standard noise models. The specific threshold value is determined by circuit geometry, not by CFD alone.
     \item \textbf{Four open predictions:} Coherence-depth complementarity, MERA-decoherence mapping, entropy attenuation, and hardware demonstration of non-trivial reversibility---all experimentally accessible on current NISQ hardware.
 \end{enumerate}
 
