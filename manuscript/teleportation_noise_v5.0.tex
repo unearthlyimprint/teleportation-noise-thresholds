@@ -331,10 +331,12 @@ The central finding of this work is the \emph{architecture-dependent} response t
 
 \begin{itemize}
     \item \textbf{Gate-based (IonQ):} Fidelity degrades gradually over a wide range ($\gamma \in [0, 0.535]$), with the threshold determined by the accumulated phase rotation reaching the orthogonality condition in the specific circuit geometry.
-    \item \textbf{Analog (Pasqal):} The transition is steeper ($\gamma \in [0.15, 0.30]$), likely because the detuning modulation couples collectively to all atoms through the Rydberg Hamiltonian, amplifying the dephasing effect relative to individual-qubit rotations.
+    \item \textbf{Analog (Pasqal):} The transition is steeper ($\gamma \in [0.15, 0.30]$), with fidelity collapsing over a narrower $\gamma$ range.
 \end{itemize}
 
-The different threshold values ($\gamma_c \approx 0.535$ vs.\ $\gamma_c \approx 0.20$) do not indicate that one platform is ``better'' or ``worse.'' Rather, they reflect the different physical coupling between the dephasing parameter and the underlying Hamiltonian. The analog system's collective coupling makes it more sensitive to global perturbations, while the gate-based system's individual-qubit rotations distribute the perturbation less efficiently.
+Crucially, this difference is \emph{primarily a consequence of the perturbation coupling mechanism, not an intrinsic hardware property}. On the gate-based platform, each $R_z(\gamma\pi\xi_j)$ rotation acts on an individual qubit independently---a \emph{local} perturbation. On the analog platform, $\gamma$ maps to a global detuning offset $\Delta$ in the Rydberg Hamiltonian $H = (\Omega/2)\sum_i \sigma_x^i - \Delta\sum_i n_i + \ldots$, which couples \emph{collectively} to all atoms simultaneously. The global coupling amplifies the dephasing effect: a small change in $\gamma$ shifts the entire Hamiltonian, whereas the same change applied as individual $R_z$ rotations perturbs each qubit independently.
+
+The different threshold values ($\gamma_c \approx 0.535$ vs.\ $\gamma_c \approx 0.20$) should therefore \emph{not} be interpreted as indicating that one platform is ``better'' or ``worse'' at resisting noise. Rather, they quantify how a single dephasing parameter couples to fundamentally different physical systems---individual-qubit phase rotations versus collective Hamiltonian detuning. A fair comparison of intrinsic hardware resilience would require implementing identical \emph{local} perturbations on both platforms, which is challenging given the analog system's global control architecture.
 
 \subsection{Four-Tier Neutral-Atom Validation}
 
@@ -379,7 +381,7 @@ We have presented a systematic cross-platform study of teleportation fidelity un
 Key results:
 \begin{enumerate}
     \item \textbf{High-fidelity teleportation:} $F = 0.988 \pm 0.003$ on IonQ Forte-1, with a control experiment confirming entanglement as the transfer mechanism.
-    \item \textbf{Architecture-dependent dephasing thresholds:} The gate-based platform shows a gradual fidelity degradation ($\gamma_c \approx 0.535$), while the analog neutral-atom platform exhibits a steeper collapse ($\gamma_c \in [0.15, 0.30]$), reflecting different noise coupling mechanisms.
+    \item \textbf{Architecture-dependent dephasing thresholds:} The gate-based platform shows a gradual fidelity degradation ($\gamma_c \approx 0.535$), while the analog neutral-atom platform exhibits a steeper collapse ($\gamma_c \in [0.15, 0.30]$). This difference arises primarily from the perturbation coupling mechanism: local individual-qubit $R_z$ rotations (gate-based) versus global Hamiltonian detuning (analog), rather than from intrinsic hardware noise differences.
     \item \textbf{Four-tier QPU validation:} The dephasing response is confirmed across idealized simulation, exact solver, hardware-realistic emulator, and physical QPU execution on FRESNEL\_CAN1, with close agreement at $\gamma = 0.20$.
     \item \textbf{Spectator qubit discovery:} Hardware compilers can identify and optimize away non-participating qubits, reducing nominally large circuits to their effective size---an important practical insight for circuit design.
 \end{enumerate}

@@ -59,9 +59,9 @@ def plot_phase_diagram(data):
     # Critical line
     plt.axvline(x=0.535, color='red', linestyle='--', label=r'$\gamma_c \approx 0.535$')
     
-    plt.xlabel(r'Decoherence Parameter $\gamma$')
+    plt.xlabel(r'Dephasing Strength $\gamma$')
     plt.ylabel('Teleportation Fidelity $F$')
-    plt.title('CFD Phase Transition: Traversability vs Decoherence')
+    plt.title('Teleportation Fidelity vs. Parametric Dephasing')
     plt.legend()
     plt.grid(True, which='both', linestyle='--', linewidth=0.5)
     
@@ -99,9 +99,9 @@ def plot_survival_probability(data):
     
     plt.axvline(x=0.535, color='red', linestyle='--', label='Critical Threshold')
     
-    plt.xlabel(r'$\gamma$')
+    plt.xlabel(r'Dephasing Strength $\gamma$')
     plt.ylabel('Survival Probability $P(0)$')
-    plt.title('Wormhole Stability: Survival Probability')
+    plt.title('Survival Probability vs. Dephasing Strength')
     plt.legend()
     plt.grid(True)
     
