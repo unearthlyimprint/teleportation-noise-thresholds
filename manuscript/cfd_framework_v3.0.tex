@@ -30,7 +30,7 @@ An Information-Geometric Framework for Quantum Decoherence\\with Hardware Valida
 \maketitle
 
 \begin{abstract}
-Standard holographic frameworks (AdS/CFT, Ryu-Takayanagi) encode bulk geometry through entanglement entropy alone. We introduce Coherence Field Dynamics (CFD), a theoretical framework in which quantum coherence---the off-diagonal density matrix elements---serves as an independent geometric degree of freedom encoding effective bulk depth, complementary to entanglement's encoding of connectivity. The coherence field $\phi(p,\gamma)$ satisfies a wave equation in information-geometric parameter space, generating a Lorentzian metric $ds^2 = \phi^2(dp^2 - d\gamma^2)$ that degenerates at a critical decoherence threshold $\gamma_c$, creating an information horizon. We derive $\gamma_c$ from geometric stability analysis and establish a correspondence between MERA tensor network depth and effective decoherence in reduced descriptions. We present five testable predictions. Companion experimental work demonstrates a fidelity threshold at $\gamma \approx 0.535$ on the IonQ platform ($F = 0.988 \pm 0.003$ baseline, collapse to $F \approx 0$ under dephasing) and consistency with the dephasing response on Pasqal's FRESNEL\_CAN1 neutral-atom QPU (noise ratio $1.13\times$ at $\gamma = 0.20$). These results are consistent with CFD's predicted critical behavior, though they do not uniquely distinguish CFD from standard noise models. Four predictions---coherence-depth complementarity, MERA-decoherence correspondence, coherence-modulated entropy scaling, and hardware validation of the reversibility property---remain open and experimentally accessible.
+Standard holographic frameworks (AdS/CFT, Ryu-Takayanagi) encode bulk geometry through entanglement entropy alone. We introduce Coherence Field Dynamics (CFD), a theoretical framework in which quantum coherence---the off-diagonal density matrix elements---serves as an independent geometric degree of freedom encoding effective bulk depth, complementary to entanglement's encoding of connectivity. The coherence field $\phi(p,\gamma)$ satisfies a wave equation in information-geometric parameter space, generating a Lorentzian metric $ds^2 = \phi^2(dp^2 - d\gamma^2)$ that degenerates at a critical decoherence threshold $\gamma_c$, creating an information horizon. We predict the existence of $\gamma_c$ from geometric stability analysis and establish a correspondence between MERA tensor network depth and effective decoherence in reduced descriptions. We present five testable predictions. Companion experimental work demonstrates a fidelity threshold at $\gamma \approx 0.535$ on the IonQ platform ($F = 0.988 \pm 0.003$ baseline, collapse to $F \approx 0$ under dephasing) and consistency with the dephasing response on Pasqal's FRESNEL\_CAN1 neutral-atom QPU (noise ratio $1.13\times$ at $\gamma = 0.20$). These results are consistent with CFD's predicted critical behavior, though they do not uniquely distinguish CFD from standard noise models. Four predictions---coherence-depth complementarity, MERA-decoherence correspondence, coherence-modulated entropy scaling, and hardware validation of the reversibility property---remain open and experimentally accessible.
 \end{abstract}
 
 % ============================================================
@@ -123,7 +123,7 @@ with effective stress-energy:
     T^{(\text{coherence})}_{\mu\nu} = (\partial_\mu\phi)(\partial_\nu\phi) - g_{\mu\nu}\!\left[\tfrac{1}{2}g^{\alpha\beta}(\partial_\alpha\phi)(\partial_\beta\phi) - V\right]
 \end{equation}
 
-\textbf{Analogue gravity interpretation:} This variational principle is an \emph{analogue gravity model}, analogous to acoustic metrics in fluid dynamics~\cite{VanRaamsdonk2010}. The constants $c$ and $G$ appearing here are \emph{effective, system-specific parameters} that map the information-geometric structure, not claims that quantum decoherence bends physical 4D spacetime. The 4D integral provides a template for how coherence-sourced stress-energy \emph{would} modify geometry if promoted to a physical field theory; the present work treats this coupling as a formal analogy.
+\textbf{Analogue gravity interpretation:} This variational principle is an \emph{analogue gravity model}, analogous to acoustic metrics in fluid dynamics~\cite{Barcelo2011}. The constants $c$ and $G$ appearing here are \emph{effective, system-specific parameters} that map the information-geometric structure, not claims that quantum decoherence bends physical 4D spacetime. The 4D integral provides a template for how coherence-sourced stress-energy \emph{would} modify geometry if promoted to a physical field theory; the present work treats this coupling as a formal analogy.
 
 \subsection{Fisher Information Metric}
 
@@ -349,7 +349,7 @@ If the open predictions are validated, CFD would establish:
     \item \textbf{$\gamma_c$ as information horizon:} A threshold beyond which bulk entropy becomes inaccessible in the information-geometric framework.
 \end{itemize}
 
-\textit{Speculative connections to ER=EPR and the Black Hole Information Paradox are conceivable but remain far from established. The current experimental circuit (3-qubit teleportation with $R_z$ dephasing) does not contain the scrambling dynamics required for a holographic dual, and any such connections require substantially more theoretical and experimental development.}
+\textit{Speculative connections to ER=EPR~\cite{Maldacena2013} and the Black Hole Information Paradox are conceivable but remain far from established. The current experimental circuit (3-qubit teleportation with $R_z$ dephasing) does not contain the scrambling dynamics required for a holographic dual, and any such connections require substantially more theoretical and experimental development.}
 
 \subsection{Limitations and Open Questions}
 
@@ -428,11 +428,9 @@ G.~Evenbly and G.~Vidal, ``Tensor network renormalization,'' Phys.\ Rev.\ Lett.\
 \bibitem{Garcia2024}
 A.~Cerezo Garc\'ia, ``Radial Coherential Dynamics: A novel approach to quantum gravity,'' Independent research (2024).
 
-\bibitem{Huckel1931}
-E.~H\"uckel, ``Quantentheoretische Beitr\"age zum Benzolproblem,'' Z.\ Phys.\ \textbf{70}, 204 (1931).
 
-\bibitem{Jozsa1994}
-R.~Jozsa, ``Fidelity for mixed quantum states,'' J.\ Mod.\ Opt.\ \textbf{41}, 2315 (1994).
+
+
 
 \bibitem{Maldacena1999}
 J.~Maldacena, ``The large $N$ limit of superconformal field theories and supergravity,'' Adv.\ Theor.\ Math.\ Phys.\ \textbf{2}, 231 (1999).
@@ -443,8 +441,7 @@ J.~Maldacena and L.~Susskind, ``Cool horizons for entangled black holes,'' Forts
 \bibitem{Orus2014}
 R.~Or\'us, ``A practical introduction to tensor networks,'' Ann.\ Phys.\ \textbf{349}, 117 (2014).
 
-\bibitem{Pauling1939}
-L.~Pauling, \textit{The Nature of the Chemical Bond}, Cornell University Press (1939).
+
 
 \bibitem{Ryu2006}
 S.~Ryu and T.~Takayanagi, ``Holographic derivation of entanglement entropy from AdS/CFT,'' Phys.\ Rev.\ Lett.\ \textbf{96}, 181602 (2006).
@@ -457,6 +454,9 @@ B.~Swingle, ``Entanglement renormalization and holography,'' Phys.\ Rev.\ D \tex
 
 \bibitem{VanRaamsdonk2010}
 M.~Van~Raamsdonk, ``Building up spacetime with quantum entanglement,'' Gen.\ Rel.\ Grav.\ \textbf{42}, 2323 (2010).
+
+\bibitem{Barcelo2011}
+C.~Barcel\'o, S.~Liberati, and M.~Visser, ``Analogue gravity,'' Living Rev.\ Rel.\ \textbf{14}, 3 (2011).
 
 \bibitem{Vidal2007}
 G.~Vidal, ``Entanglement renormalization,'' Phys.\ Rev.\ Lett.\ \textbf{99}, 220405 (2007).
