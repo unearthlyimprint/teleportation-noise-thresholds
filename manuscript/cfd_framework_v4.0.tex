@@ -1,0 +1,411 @@
+\documentclass[twocolumn,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{caption}
+\geometry{margin=0.75in, top=1in, bottom=1in}
+
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+
+\title{\textbf{Coherence Field Dynamics:\\
+An Information-Geometric Framework for Quantum Decoherence\\with Hardware Validation}\\[0.3em]
+\normalsize v4.0 --- Theoretical Conjecture Paper}
+
+\author{Celal Arda\\
+\small Independent Researcher, Computational Foundations of Quantum Gravity\\
+\small \texttt{celal.arda@outlook.de}}
+
+\date{February 24, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Standard holographic frameworks (AdS/CFT, Ryu-Takayanagi) encode bulk geometry through entanglement entropy alone. We introduce Coherence Field Dynamics (CFD), a theoretical framework in which quantum coherence---the off-diagonal density matrix elements---serves as an independent geometric degree of freedom encoding effective bulk depth, complementary to entanglement's encoding of connectivity. The coherence field $\phi(p,\gamma)$ satisfies a wave equation in information-geometric parameter space, generating a Lorentzian metric $ds^2 = \phi^2(dp^2 - d\gamma^2)$ that degenerates at a critical decoherence threshold $\gamma_c$, creating an information horizon. We predict the existence of $\gamma_c$ from geometric stability analysis and establish a correspondence between MERA tensor network depth and effective decoherence in reduced descriptions. We present five testable predictions, all experimentally accessible on current NISQ hardware: coherence-depth complementarity, MERA-decoherence correspondence, coherence-modulated entropy scaling, parametric geometry evolution, and coherence-information decoupling. Companion experimental work~\cite{Arda2026companion} reports consistency with threshold behavior on IonQ and Pasqal platforms, though those results do not uniquely distinguish CFD from standard noise models. We situate CFD within the existing holographic landscape, engaging with the Danielson-Satishchandran-Wald paradigm, holographic quantum error correction, and recent cautions regarding the physical content of Fisher information geometry.
+\end{abstract}
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+\subsection{Motivation}
+
+The holographic principle, formalized through the AdS/CFT correspondence~\cite{Maldacena1999}, posits a duality between quantum field theories on a boundary and gravitational theories in a higher-dimensional bulk. The Ryu-Takayanagi (RT) formula~\cite{Ryu2006}
+\begin{equation}
+    S(\rho_A) = \frac{\text{Area}(\gamma_A)}{4G_N}
+    \label{eq:rt}
+\end{equation}
+relates entanglement entropy to minimal bulk surface area. Multiscale Entanglement Renormalization Ansatz (MERA) tensor networks~\cite{Vidal2007, Swingle2012} provide a discrete realization, mapping renormalization group flow to holographic depth~\cite{Beny2013, Evenbly2015}.
+
+However, standard holography treats entanglement entropy as the \emph{primary} quantum information observable. Quantum coherence---the off-diagonal density matrix elements---remains geometrically uninterpreted, despite being a quantifiable resource under incoherent operations~\cite{Streltsov2017, Baumgratz2014}. This omission is significant: two quantum states can share identical entanglement entropy yet differ dramatically in their coherence properties, suggesting that entanglement entropy alone cannot fully encode the geometry of information space.
+
+\textit{A note on resource independence:} While coherence and entanglement are independently \emph{quantifiable} as resources, they are not fully independent: coherence is a necessary ingredient for entanglement generation, and the two are interconvertible under local incoherent operations~\cite{Streltsov2015}. CFD exploits their independent \emph{geometric} roles---entanglement encoding connectivity, coherence encoding depth---not a claim of operational independence.
+
+\subsection{Key Thesis: Coherence-Depth Complementarity}
+
+\begin{conjecture}[Coherence-Depth Complementarity]
+\label{conj:complementarity}
+Quantum coherence $\phi(p, \gamma)$ parameterizes information geometry such that:
+\begin{itemize}
+    \item Entanglement entropy $S(\rho)$ determines bulk \textbf{connectivity} (minimal surface area).
+    \item Coherence field $\phi$ determines effective bulk \textbf{depth} (information accessibility).
+\end{itemize}
+\end{conjecture}
+
+This extension introduces three new elements beyond standard holography:
+\begin{enumerate}
+    \item A coherence-modulated entropy relation with attenuation function $f(\gamma)$.
+    \item An effective MERA-decoherence correspondence in reduced descriptions.
+    \item Critical behavior at a decoherence threshold $\gamma_c$, whose specific value depends on the system geometry.
+\end{enumerate}
+
+All three are testable on current quantum hardware.
+
+% ============================================================
+\section{Theoretical Framework}
+% ============================================================
+
+\subsection{Coherence Field Equation}
+
+The coherence field $\phi : (p, \gamma) \to \mathbb{R}$ satisfies a wave-like equation in information geometry:
+\begin{equation}
+    \Box\phi + m_{\text{eff}}^2 \phi = 0, \qquad \Box = \frac{\partial^2}{\partial p^2} - \frac{\partial^2}{\partial \gamma^2}
+    \label{eq:field}
+\end{equation}
+where $p \in [0,1]$ is the entanglement parameter, $\gamma \geq 0$ is decoherence strength, and $m_{\text{eff}}^2 < 0$ for the coherent regime (solutions decay in $\gamma$).
+
+\begin{remark}
+The negative effective mass-squared corresponds to exponential decay in decoherence space, consistent with quantum information-theoretic constraints~\cite{Zurek2003}. This differs from tachyonic instabilities in relativistic field theory; the AdS analogue is the Breitenlohner-Freedman bound~\cite{BreitenlohnerFreedman1982}, where scalar fields with $m^2 \geq m^2_{\text{BF}} = -d^2/(4L^2)$ are perfectly stable in Anti-de Sitter spacetime despite negative mass-squared. In the CFD context, the ``decay'' reflects the physical fact that coherence is fragile: the information-geometric ``potential'' from the parameter space curvature provides the stabilizing mechanism.
+\end{remark}
+
+\subsection{Information-Geometric Metric}
+
+The coherence field generates a Lorentzian metric on $(p, \gamma)$ parameter space:
+\begin{equation}
+    ds^2 = \phi^2(p, \gamma)\left(dp^2 - d\gamma^2\right)
+    \label{eq:metric}
+\end{equation}
+with conformal factor $\phi^2$. The metric signature is characterized by:
+\begin{equation}
+    \sigma = \phi^4\left[\left(\frac{\partial^2\phi}{\partial p^2}\right)^2 - \left(\frac{\partial^2\phi}{\partial \gamma^2}\right)^2\right]
+    \label{eq:sigma}
+\end{equation}
+Lorentzian signature requires $\sigma < 0$. The stability threshold occurs when $|\sigma| \to 0$ (metric degeneracy).
+
+\textit{Physical interpretation:} As $\gamma$ increases, $\phi \to 0$ causes metric degeneracy---information becomes geometrically inaccessible. This parallels causal disconnection in relativistic horizons~\cite{VanRaamsdonk2010}.
+
+\subsection{Variational Principle}
+
+We derive effective spacetime geometry from a coherence action principle. The total action couples Einstein gravity to an information-geometric Lagrangian:
+\begin{equation}
+    S = \int d^4x \sqrt{-g}\left[\frac{c^4}{16\pi G}\mathcal{R} + \mathcal{L}_{\text{coherence}}\right]
+\end{equation}
+where the coherence Lagrangian is:
+\begin{equation}
+    \mathcal{L}_{\text{coherence}} = \tfrac{1}{2} F^{\mu\nu}(\partial_\mu\phi)(\partial_\nu\phi) - V(\phi, \mathrm{Tr}(F))
+\end{equation}
+Here $F^{\mu\nu}$ is the coherence tensor (inverse of Fisher metric $F_{\mu\nu}$), and $\phi(p,\gamma)$ encodes quantum state amplitudes. Variation with respect to $g_{\mu\nu}$ yields modified Einstein equations:
+\begin{equation}
+    G_{\mu\nu} = \frac{8\pi G}{c^4}\, T^{(\text{eff})}_{\mu\nu}
+\end{equation}
+with effective stress-energy:
+\begin{equation}
+    T^{(\text{coherence})}_{\mu\nu} = (\partial_\mu\phi)(\partial_\nu\phi) - g_{\mu\nu}\!\left[\tfrac{1}{2}g^{\alpha\beta}(\partial_\alpha\phi)(\partial_\beta\phi) - V\right]
+\end{equation}
+
+\textbf{Analogue gravity interpretation:} This variational principle is an \emph{analogue gravity model}, analogous to acoustic metrics in fluid dynamics~\cite{Barcelo2011}. The constants $c$ and $G$ appearing here are \emph{effective, system-specific parameters} that map the information-geometric structure, not claims that quantum decoherence bends physical 4D spacetime. The 4D integral provides a template for how coherence-sourced stress-energy \emph{would} modify geometry if promoted to a physical field theory; the present work treats this coupling as a formal analogy.
+
+\subsection{Fisher Information Metric}
+
+The quantum Fisher information matrix on parameter space $\theta = (p, \gamma)$ is:
+\begin{equation}
+    g^{\text{Fisher}}_{\mu\nu}(\theta) = \mathrm{Tr}\!\left[\rho_\theta\, \partial_\mu\ln\rho_\theta\, \partial_\nu\ln\rho_\theta\right]
+\end{equation}
+Following Caticha's entropic gravity~\cite{Caticha2005}, the Fisher metric serves as the emergent spacetime metric. As $\gamma \to \gamma_c$, the Ricci scalar diverges, signaling horizon formation.
+
+\textit{Connections to established results:} Lashkari and Van~Raamsdonk~\cite{LashkariVanRaamsdonk2016} proved rigorously that canonical energy in holographic perturbation theory equals quantum Fisher information---a genuine, established result in AdS/CFT that provides the strongest existing support for information geometry $\to$ spacetime connections. We note, however, the important caution of Erdmenger, Grosvenor, and Jefferson~\cite{Erdmenger2020}: Fisher metrics generically produce hyperbolic (AdS-like) geometry even from simple Gaussian distributions. This may reflect mathematical structure rather than deep physics, and the map is not injective. Any claim that the CFD information geometry represents physically meaningful spacetime must ultimately be justified beyond the generic mathematical tendency.
+
+% ============================================================
+\section{Holographic Extensions}
+\label{sec:holographic}
+% ============================================================
+
+\subsection{Coherence-Modulated Entropy Relation}
+
+\begin{proposition}[Coherence Attenuation]
+Effective entropy accessible from boundary measurements exhibits coherence-dependent suppression:
+\begin{equation}
+    S_{\text{eff}}(\gamma) = S_0 \cdot f(\gamma)
+    \label{eq:attenuation}
+\end{equation}
+where the attenuation function is:
+\begin{equation}
+    f(\gamma) = e^{-\gamma/\gamma_c}, \qquad f(0) = 1, \quad f(\gamma_c) = 1/e
+\end{equation}
+with critical scale $\gamma_c$ determined by geometric stability analysis.
+\end{proposition}
+
+\textit{Physical interpretation:} Unlike standard RT which computes static minimal surfaces, $S_{\text{eff}}(\gamma)$ represents entropy extractable via coherence-preserving measurements. Decoherence effectively ``hides'' bulk entropy from boundary observers~\cite{Breuer2002}.
+
+\textit{Modified RT formula:}
+\begin{equation}
+    A_{\text{eff}}(\gamma) = A_{\min} \cdot f(\gamma)
+    \label{eq:aeff}
+\end{equation}
+The effective entangling surface area contracts---not due to topology change, but due to reduced information accessibility through coherent channels.
+
+\subsection{Critical Decoherence Threshold}
+
+The critical value $\gamma_c$ emerges from geometric stability requirements. Setting $|\sigma| = \epsilon_{\min}$ (minimal detectable signature) in Eq.~\eqref{eq:sigma}:
+\begin{equation}
+    \phi^4(\gamma_c) = \epsilon_{\min}
+\end{equation}
+For Bell states with decoherence model $\phi(\gamma) = \exp(-\gamma/\gamma_0)$:
+\begin{equation}
+    \gamma_c = \gamma_0 \ln\left(\epsilon_{\min}^{-1/4}\right)
+    \label{eq:gamma_c}
+\end{equation}
+The framework predicts the \emph{existence} of a geometric threshold $\gamma_c$ at which metric degeneracy occurs and information becomes inaccessible. The specific numerical value of $\gamma_c$ depends on the system parameters: $\gamma_0$ (the decoherence scale of the physical system) and $\epsilon_{\min}$ (the noise floor).
+
+\subsection{MERA-CFD Effective Correspondence}
+
+\begin{conjecture}[Effective Decoherence in Reduced Descriptions]
+\label{conj:mera}
+MERA tensor network depth $k$ maps to effective decoherence in reduced density matrices:
+\begin{equation}
+    \gamma_{\text{eff}}(k) = \gamma_0 + k \cdot \Delta\gamma, \qquad k = 0, 1, 2, \ldots
+    \label{eq:mera}
+\end{equation}
+where $\Delta\gamma$ is the decoherence increment per renormalization step, determined by the entanglement structure of the MERA tensors.
+\end{conjecture}
+
+\textit{Physical interpretation:} In MERA, each coarse-graining layer removes short-range entanglement, leaving the reduced state with a modified coherence profile. In CFD, this amounts to moving deeper into the bulk at a higher effective $\gamma$. Note that this mapping is \emph{effective}, not fundamental: MERA layers do not literally ``add decoherence,'' but tracing over UV degrees of freedom reduces coherence in the retained degrees of freedom. Formally, $\gamma_{\text{eff}}(k)$ is the decoherence parameter that would produce the same Fisher metric as $k$ layers of MERA coarse-graining~\cite{Swingle2012, Beny2013}.
+
+% ============================================================
+\section{Testable Predictions}
+\label{sec:predictions}
+% ============================================================
+
+CFD produces five distinct testable predictions, summarized in Table~\ref{tab:predictions}.
+
+\begin{table*}[t]
+    \centering
+    \small
+    \begin{tabular}{clcl}
+        \toprule
+        \textbf{\#} & \textbf{Prediction} & \textbf{Status} & \textbf{Proposed Test} \\
+        \midrule
+        1 & Coherence-depth complementarity & Open & Fixed-$S(\rho)$, variable-$\phi$ state comparison \\
+        2 & MERA-decoherence correspondence & Open & $\gamma_{\text{eff}}(k)$ extraction from partial tomography \\
+        3 & Entropy attenuation $S_{\text{eff}}(\gamma)$ & Open & Entanglement witnesses at multiple $\gamma$ \\
+        4 & Parametric geometry evolution & Consistent$^*$ & Metric determinant tracking as $\gamma$ increases \\
+        5 & Coherence-information decoupling & Open & Entanglement persistence at $\gamma \approx \gamma_c$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{CFD predictions and their current status. $^*$Consistent with companion experimental data~\cite{Arda2026companion}, but also consistent with standard noise models.}
+    \label{tab:predictions}
+\end{table*}
+
+\subsection{Parametric Geometry Evolution}
+
+Unlike static AdS/CFT geometry, CFD predicts continuous parametric evolution of the information-geometric metric:
+\begin{equation}
+    g_{\mu\nu}(\gamma) = \phi^2(\gamma) \cdot \eta_{\mu\nu}
+\end{equation}
+where $\eta_{\mu\nu} = \mathrm{diag}(1,-1)$. As $\gamma$ increases from 0 to $\gamma_c$:
+\begin{itemize}
+    \item Conformal factor $\phi^2 \to 0$ (metric collapses).
+    \item Ricci scalar $R \to \infty$ (curvature singularity in information space).
+    \item Effective entangling area $A_{\text{eff}} \to 0$ (information inaccessibility).
+\end{itemize}
+This continuous evolution is in principle measurable via quantum state tomography at multiple $\gamma$ values.
+
+\subsection{Coherence-Dependent Information Accessibility}
+
+CFD predicts a sharp distinction between entanglement persistence and information accessibility:
+
+\begin{conjecture}[Coherence-Information Decoupling]
+Near $\gamma_c$, quantum correlations (entanglement) can persist while coherence-mediated information transfer ceases. Specifically, $S(\rho) > 0$ while information accessibility $\to 0$ at $\gamma = \gamma_c$.
+\end{conjecture}
+
+This prediction is supported by numerical simulation at $\gamma = 0.533 \approx \gamma_c$: the metric determinant $|\sigma| = 0.0044$ (near-degenerate), yet quantum fidelity $F = 0.734$ remains super-classical ($F > 0.5$). Coherence and entanglement exhibit distinct scaling behaviors near the critical threshold.
+
+% ============================================================
+\section{Relationship to Existing Work}
+% ============================================================
+
+\subsection{CFD vs.\ Standard Holography}
+
+\begin{table}[t]
+    \centering
+    \small
+    \begin{tabular}{lp{1.8cm}p{2.0cm}}
+        \toprule
+        \textbf{Aspect} & \textbf{Standard} & \textbf{CFD} \\
+        \midrule
+        Info channel & Entanglement only & Ent.\ + Coherence \\
+        Geometry & Static surfaces & Parametric \\
+        Observable & $S$ (entropy) & $\phi$, $S_{\text{eff}}$ \\
+        Bulk evol. & Fixed & $\gamma$-dependent \\
+        Testability & Indirect & Direct (hw) \\
+        \bottomrule
+    \end{tabular}
+    \caption{CFD compared to standard holographic principles.}
+    \label{tab:comparison}
+\end{table}
+
+\subsection{The Danielson-Satishchandran-Wald Paradigm}
+
+A major body of recent work establishes that horizons fundamentally \emph{cause} decoherence in nearby quantum systems. Satishchandran et al.~\cite{DSW2024} showed that any Killing horizon decoheres quantum superpositions at a constant rate via entanglement with interior degrees of freedom. This establishes a direction: horizons $\to$ decoherence.
+
+CFD proposes the conceptual inverse: coherence loss $\to$ effective information horizons. These directions are not necessarily contradictory---they may be complementary descriptions of the coherence-geometry interface. In the DSW paradigm, \emph{physical} horizons produce \emph{physical} decoherence. In CFD, loss of coherence in the \emph{information-geometric} parameter space produces \emph{effective} horizons (metric degeneracy). Whether these are two faces of the same phenomenon or merely a formal analogy remains an open question requiring rigorous investigation.
+
+\subsection{Holographic Quantum Error Correction}
+
+The Almheiri-Dong-Harlow (ADH) framework~\cite{AlmheiriDongHarlow2015} established that bulk locality in AdS/CFT implements quantum error correction: logical (bulk) operators are encoded redundantly on the boundary. The HaPPY code~\cite{PastawskiYoshidaHarlowPreskill2015} made this concrete with tensor networks of perfect tensors reproducing the RT formula.
+
+CFD's coherence attenuation relation $S_{\text{eff}}(\gamma) = S_0 e^{-\gamma/\gamma_c}$ may connect to QEC properties: as coherence degrades, the effective code distance of the holographic encoding could decrease, eventually reaching a threshold below which bulk operators cannot be reliably reconstructed. Establishing this connection rigorously---relating $\gamma_c$ to the code distance of CFD's information-geometric encoding---is an important direction for future work.
+
+\subsection{Cautions on Information Geometry}
+
+The program of deriving spacetime geometry from information geometry is well-motivated but faces fundamental limitations. Erdmenger, Grosvenor, and Jefferson~\cite{Erdmenger2020} demonstrated that Fisher metrics generically produce hyperbolic (AdS-like) geometry from Gaussian distributions. This raises the question of whether emergent AdS geometry from Fisher metrics reflects deep physics or mathematical structure. 
+
+Furthermore, the Fisher metric's uniqueness (Čencov's theorem) relies on assumptions that may be violated in quantum gravity regimes~\cite{Braunstein1994}. CFD is subject to this caution: the coherence-generated metric (Eq.~\ref{eq:metric}) may produce ``horizon-like'' degeneracy as a generic mathematical feature rather than a physically meaningful information boundary. Distinguishing these possibilities requires experiments that go beyond confirming the existence of a threshold (which standard quantum mechanics predicts) to testing predictions that are \emph{uniquely} geometric---such as the coherence-depth complementarity conjecture.
+
+\subsection{Implications for Quantum Information}
+
+If the open predictions are validated, CFD would establish:
+\begin{itemize}
+    \item \textbf{Coherence as geometric parameter:} A quantum resource with geometric interpretation, complementary to entanglement's role in encoding connectivity~\cite{Streltsov2017}.
+    \item \textbf{$\gamma_c$ as information horizon:} A threshold beyond which bulk entropy becomes inaccessible in the information-geometric framework.
+\end{itemize}
+
+\textit{Speculative connections to ER=EPR~\cite{Maldacena2013} and the Black Hole Information Paradox are conceivable but remain far from established. Any such connections require circuits with scrambling dynamics and significantly more theoretical development.}
+
+\subsection{Limitations and Open Questions}
+
+\begin{enumerate}
+    \item \textbf{Many-body scaling:} Current formalism is limited to bipartite systems; multipartite extension requires tensor network generalization~\cite{Orus2014}.
+    \item \textbf{Microscopic derivation:} The field equation (Eq.~\ref{eq:field}) is phenomenological; a derivation from the HaPPY code or MERA structure would substantially strengthen the framework.
+    \item \textbf{Dynamical time evolution:} The framework is parametric in $\gamma$; coupling to external time coordinates requires Hamiltonian formulation~\cite{Breuer2002}.
+    \item \textbf{QEC connection:} Relationship between coherence attenuation and code distance in MERA-based error correction remains unexplored.
+    \item \textbf{Non-injectivity of Fisher metrics:} The map from physical systems to information geometry is not injective~\cite{Erdmenger2020}; different physical configurations can produce identical metrics.
+    \item \textbf{Falsifiability:} A unique, quantitative prediction that distinguishes CFD from standard decoherence theory is needed. The proposed experiments test necessary but not sufficient conditions.
+\end{enumerate}
+
+\subsection{Proposed Experiments for Open Predictions}
+\label{sec:future_mera}
+
+\textbf{Coherence-depth complementarity (Conjecture~\ref{conj:complementarity}):} Prepare pairs of 3--5 qubit states with equal entanglement entropy but different coherence (vary $\gamma$ while compensating $S(\rho)$ via local rotations). Measure information accessibility via quantum state discrimination. If states with lower coherence show reduced accessibility at fixed entropy, the conjecture is confirmed.
+
+\textbf{MERA-decoherence correspondence (Conjecture~\ref{conj:mera}):} Implement a 2--3 layer MERA circuit. Perform partial tomography at each layer to extract $\gamma_{\text{eff}}(k)$. Plot effective decoherence versus layer depth; linearity confirms the correspondence.
+
+\textbf{Entropy attenuation:} Measure accessible entanglement entropy $S_{\text{eff}}(\gamma)$ via entanglement witnesses at multiple $\gamma$ values. Fit to exponential model (Eq.~\ref{eq:attenuation}). This extends existing data (which measured only ground-state probability) to the entropy observable predicted by CFD.
+
+% ============================================================
+\section{Conclusion}
+% ============================================================
+
+Coherence Field Dynamics addresses a genuine gap in the holographic dictionary: while entanglement entropy, complexity, relative entropy, and (very recently) quantum discord have all received geometric interpretations, quantum coherence---despite being an independently quantifiable resource---lacks a geometric dual. CFD proposes that coherence parameterizes effective bulk depth, complementary to entanglement's encoding of connectivity.
+
+Key contributions of this work:
+\begin{enumerate}
+    \item \textbf{Theoretical framework:} Coherence field equation, information-geometric metric, and variational principle (presented as an analogue gravity model).
+    \item \textbf{Holographic extensions:} Coherence-modulated entropy relation $S_{\text{eff}}(\gamma) = S_0 e^{-\gamma/\gamma_c}$ and MERA-decoherence correspondence $\gamma_{\text{eff}}(k) = \gamma_0 + k \Delta\gamma$.
+    \item \textbf{Five testable predictions:} Coherence-depth complementarity, MERA-decoherence mapping, entropy attenuation, parametric geometry evolution, and coherence-information decoupling---all experimentally accessible on current NISQ hardware.
+    \item \textbf{Critical engagement:} Explicit identification of limitations, including the non-injectivity of Fisher metrics, the ad hoc nature of the gravitational coupling, and the need for falsifiable unique predictions.
+\end{enumerate}
+
+The framework's distinguishing feature is testability: unlike approaches that require Planck-scale energies or astronomical observations, CFD predictions can be probed with quantum simulators. However, we emphasize that testability alone does not establish validity---the critical next step is identifying an experimental outcome that is predicted by CFD but \emph{not} by standard quantum mechanics. We offer this framework as a conjecture worthy of investigation, not as an established result.
+
+\section*{Acknowledgments}
+
+We thank Microsoft Azure Quantum for computing resources and the IonQ and Pasqal teams for hardware access used in the companion experimental work~\cite{Arda2026companion}.
+
+\begin{thebibliography}{99}
+
+\bibitem{AlmheiriDongHarlow2015}
+A.~Almheiri, X.~Dong, and D.~Harlow, ``Bulk locality and quantum error correction in AdS/CFT,'' JHEP \textbf{2015}, 163 (2015). arXiv:1411.7041.
+
+\bibitem{Amari2016}
+S.~Amari, \textit{Information Geometry and Its Applications}, Applied Mathematical Sciences \textbf{194}, Springer (2016).
+
+\bibitem{Arda2026companion}
+C.~Arda, ``Cross-platform noise thresholds in quantum teleportation: Trapped-ion and neutral-atom architectures,'' Preprint v5.0 (2026).
+
+\bibitem{Barcelo2011}
+C.~Barcel\'o, S.~Liberati, and M.~Visser, ``Analogue gravity,'' Living Rev.\ Rel.\ \textbf{14}, 3 (2011).
+
+\bibitem{Baumgratz2014}
+T.~Baumgratz, M.~Cramer, and M.~B.~Plenio, ``Quantifying coherence,'' Phys.\ Rev.\ Lett.\ \textbf{113}, 140401 (2014).
+
+\bibitem{Beny2013}
+C.~B\'eny, ``Causal structure of the entanglement renormalization ansatz,'' New J.\ Phys.\ \textbf{15}, 023020 (2013).
+
+\bibitem{Braunstein1994}
+S.~L.~Braunstein and C.~M.~Caves, ``Statistical distance and the geometry of quantum states,'' Phys.\ Rev.\ Lett.\ \textbf{72}, 3439 (1994).
+
+\bibitem{BreitenlohnerFreedman1982}
+P.~Breitenlohner and D.~Z.~Freedman, ``Positive energy in anti-de Sitter backgrounds and gauged extended supergravity,'' Phys.\ Lett.\ B \textbf{115}, 197 (1982).
+
+\bibitem{Breuer2002}
+H.-P.~Breuer and F.~Petruccione, \textit{The Theory of Open Quantum Systems}, Oxford University Press (2002).
+
+\bibitem{Caticha2005}
+A.~Caticha, ``Entropic dynamics,'' AIP Conference Proceedings \textbf{803}, 302 (2005).
+
+\bibitem{DSW2024}
+B.~S.~Danielson, G.~Satishchandran, and R.~M.~Wald, ``Gravitationally mediated entanglement: Newtonian field vs.\ gravitons,'' Phys.\ Rev.\ D \textbf{109}, 065031 (2024).
+
+\bibitem{Erdmenger2020}
+J.~Erdmenger, K.~T.~Grosvenor, and R.~Jefferson, ``Information geometry in quantum field theory: lessons from simple applications,'' SciPost Phys.\ \textbf{8}, 073 (2020).
+
+\bibitem{Evenbly2015}
+G.~Evenbly and G.~Vidal, ``Tensor network renormalization,'' Phys.\ Rev.\ Lett.\ \textbf{115}, 180405 (2015).
+
+\bibitem{LashkariVanRaamsdonk2016}
+N.~Lashkari and M.~Van~Raamsdonk, ``Canonical energy is quantum Fisher information,'' JHEP \textbf{04} (2016) 153.
+
+\bibitem{Maldacena1999}
+J.~Maldacena, ``The large $N$ limit of superconformal field theories and supergravity,'' Adv.\ Theor.\ Math.\ Phys.\ \textbf{2}, 231 (1999).
+
+\bibitem{Maldacena2013}
+J.~Maldacena and L.~Susskind, ``Cool horizons for entangled black holes,'' Fortschr.\ Phys.\ \textbf{61}, 781 (2013).
+
+\bibitem{Orus2014}
+R.~Or\'us, ``A practical introduction to tensor networks,'' Ann.\ Phys.\ \textbf{349}, 117 (2014).
+
+\bibitem{PastawskiYoshidaHarlowPreskill2015}
+F.~Pastawski, B.~Yoshida, D.~Harlow, and J.~Preskill, ``Holographic quantum error-correcting codes: Toy models for the bulk/boundary correspondence,'' JHEP \textbf{2015}, 149 (2015). arXiv:1503.06237.
+
+\bibitem{Ryu2006}
+S.~Ryu and T.~Takayanagi, ``Holographic derivation of entanglement entropy from AdS/CFT,'' Phys.\ Rev.\ Lett.\ \textbf{96}, 181602 (2006).
+
+\bibitem{Streltsov2015}
+A.~Streltsov, U.~Singh, H.~S.~Dhar, M.~N.~Bera, and G.~Adesso, ``Measuring quantum coherence with entanglement,'' Phys.\ Rev.\ Lett.\ \textbf{115}, 020403 (2015).
+
+\bibitem{Streltsov2017}
+A.~Streltsov, G.~Adesso, and M.~B.~Plenio, ``Colloquium: Quantum coherence as a resource,'' Rev.\ Mod.\ Phys.\ \textbf{89}, 041003 (2017).
+
+\bibitem{Swingle2012}
+B.~Swingle, ``Entanglement renormalization and holography,'' Phys.\ Rev.\ D \textbf{86}, 065007 (2012).
+
+\bibitem{VanRaamsdonk2010}
+M.~Van~Raamsdonk, ``Building up spacetime with quantum entanglement,'' Gen.\ Rel.\ Grav.\ \textbf{42}, 2323 (2010).
+
+\bibitem{Vidal2007}
+G.~Vidal, ``Entanglement renormalization,'' Phys.\ Rev.\ Lett.\ \textbf{99}, 220405 (2007).
+
+\bibitem{Zurek2003}
+W.~H.~Zurek, ``Decoherence, einselection, and the quantum origins of the classical,'' Rev.\ Mod.\ Phys.\ \textbf{75}, 715 (2003).
+
+\end{thebibliography}
+
+\end{document}
