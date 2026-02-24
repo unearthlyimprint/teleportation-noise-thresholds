@@ -28,7 +28,7 @@ An Information-Geometric Framework for Quantum Decoherence\\with Hardware Valida
 \maketitle
 
 \begin{abstract}
-Standard holographic frameworks (AdS/CFT, Ryu-Takayanagi) encode bulk geometry through entanglement entropy alone. We introduce Coherence Field Dynamics (CFD), a theoretical framework in which quantum coherence---the off-diagonal density matrix elements---serves as an independent geometric degree of freedom encoding effective bulk depth, complementary to entanglement's encoding of connectivity. The coherence field $\phi(p,\gamma)$ satisfies a wave equation in information-geometric parameter space, generating a Lorentzian metric $ds^2 = \phi^2(dp^2 - d\gamma^2)$ that degenerates at a critical decoherence threshold $\gamma_c$, creating an information horizon. We predict the existence of $\gamma_c$ from geometric stability analysis and establish a correspondence between MERA tensor network depth and effective decoherence in reduced descriptions. We present five testable predictions, all experimentally accessible on current NISQ hardware: coherence-depth complementarity, MERA-decoherence correspondence, coherence-modulated entropy scaling, parametric geometry evolution, and coherence-information decoupling. Companion experimental work~\cite{Arda2026companion} reports consistency with threshold behavior on IonQ and Pasqal platforms, though those results do not uniquely distinguish CFD from standard noise models. We situate CFD within the existing holographic landscape, engaging with the Danielson-Satishchandran-Wald paradigm, holographic quantum error correction, and recent cautions regarding the physical content of Fisher information geometry.
+Standard holographic frameworks (AdS/CFT, Ryu-Takayanagi) encode bulk geometry through entanglement entropy alone. We introduce Coherence Field Dynamics (CFD), a theoretical framework in which quantum coherence---the off-diagonal density matrix elements---serves as an independent geometric degree of freedom encoding effective bulk depth, complementary to entanglement's encoding of connectivity. The coherence field $\phi(p,\gamma)$ satisfies a wave equation in information-geometric parameter space, generating a Lorentzian metric $ds^2 = \phi^2(dp^2 - d\gamma^2)$ that degenerates at a critical decoherence threshold $\gamma_c$, creating an information horizon. We predict the existence of $\gamma_c$ from geometric stability analysis and establish a correspondence between MERA tensor network depth and effective decoherence in reduced descriptions. We present five testable predictions, all experimentally accessible on current NISQ hardware: coherence-depth complementarity, MERA-decoherence correspondence, coherence-modulated entropy scaling, parametric geometry evolution, and coherence-information decoupling. Companion experimental work~\cite{Arda2026companion} reports consistency with threshold behavior on trapped-ion (IonQ Forte-1) and neutral-atom (Pasqal FRESNEL\_CAN1) platforms, though those results do not uniquely distinguish CFD from standard noise models. We situate CFD within the existing holographic landscape, engaging with the Danielson-Satishchandran-Wald paradigm, holographic quantum error correction, and recent cautions regarding the physical content of Fisher information geometry.
 \end{abstract}
 
 % ============================================================
@@ -48,7 +48,7 @@ However, standard holography treats entanglement entropy as the \emph{primary} q
 
 \textit{A note on resource independence:} While coherence and entanglement are independently \emph{quantifiable} as resources, they are not fully independent: coherence is a necessary ingredient for entanglement generation, and the two are interconvertible under local incoherent operations~\cite{Streltsov2015}. CFD exploits their independent \emph{geometric} roles---entanglement encoding connectivity, coherence encoding depth---not a claim of operational independence.
 
-\subsection{Key Thesis: Coherence-Depth Complementarity}
+\subsection{Main Conjecture: Coherence-Depth Complementarity}
 
 \begin{conjecture}[Coherence-Depth Complementarity]
 \label{conj:complementarity}
@@ -82,7 +82,7 @@ The coherence field $\phi : (p, \gamma) \to \mathbb{R}$ satisfies a wave-like eq
 where $p \in [0,1]$ is the entanglement parameter, $\gamma \geq 0$ is decoherence strength, and $m_{\text{eff}}^2 < 0$ for the coherent regime (solutions decay in $\gamma$).
 
 \begin{remark}
-The negative effective mass-squared corresponds to exponential decay in decoherence space, consistent with quantum information-theoretic constraints~\cite{Zurek2003}. This differs from tachyonic instabilities in relativistic field theory; the AdS analogue is the Breitenlohner-Freedman bound~\cite{BreitenlohnerFreedman1982}, where scalar fields with $m^2 \geq m^2_{\text{BF}} = -d^2/(4L^2)$ are perfectly stable in Anti-de Sitter spacetime despite negative mass-squared. In the CFD context, the ``decay'' reflects the physical fact that coherence is fragile: the information-geometric ``potential'' from the parameter space curvature provides the stabilizing mechanism.
+The negative effective mass-squared corresponds to exponential decay in decoherence space, consistent with quantum information-theoretic constraints~\cite{Zurek2003}. This differs from tachyonic instabilities in relativistic field theory. By analogy with the Breitenlohner-Freedman (BF) bound in AdS$_2$~\cite{BreitenlohnerFreedman1982}---where scalar fields with $m^2 \geq m^2_{\text{BF}} = -d^2/(4L^2)$ are perfectly stable despite negative mass-squared---the CFD parameter space $(p, \gamma)$ admits stable decaying solutions when the curvature of the information-geometric ``potential'' provides a confining mechanism. We emphasize that the BF bound applies rigorously in Anti-de Sitter spacetime; its invocation here is analogical, motivating rather than proving stability.
 \end{remark}
 
 \subsection{Information-Geometric Metric}
@@ -235,7 +235,7 @@ CFD predicts a sharp distinction between entanglement persistence and informatio
 Near $\gamma_c$, quantum correlations (entanglement) can persist while coherence-mediated information transfer ceases. Specifically, $S(\rho) > 0$ while information accessibility $\to 0$ at $\gamma = \gamma_c$.
 \end{conjecture}
 
-This prediction is supported by numerical simulation at $\gamma = 0.533 \approx \gamma_c$: the metric determinant $|\sigma| = 0.0044$ (near-degenerate), yet quantum fidelity $F = 0.734$ remains super-classical ($F > 0.5$). Coherence and entanglement exhibit distinct scaling behaviors near the critical threshold.
+This prediction is supported by noiseless state-vector simulation at $\gamma = 0.533 \approx \gamma_c$: the metric determinant $|\det(g)| = 0.0044$ (near-degenerate), yet quantum fidelity $F = 0.734$ remains super-classical ($F > 0.5$). Coherence and entanglement exhibit distinct scaling behaviors near the critical threshold.
 
 % ============================================================
 \section{Relationship to Existing Work}
@@ -271,7 +271,7 @@ CFD proposes the conceptual inverse: coherence loss $\to$ effective information 
 
 \subsection{Holographic Quantum Error Correction}
 
-The Almheiri-Dong-Harlow (ADH) framework~\cite{AlmheiriDongHarlow2015} established that bulk locality in AdS/CFT implements quantum error correction: logical (bulk) operators are encoded redundantly on the boundary. The HaPPY code~\cite{PastawskiYoshidaHarlowPreskill2015} made this concrete with tensor networks of perfect tensors reproducing the RT formula. Bentsen, Nguyen, and Swingle~\cite{BentsenNguyenSwingle2024} recently showed that approximate QEC codes arise from SYK ground states with code distance scaling as $N^{1/2}$, where the large distance arises from long wormhole geometry---directly connecting wormhole structure to error correction properties.
+The Almheiri-Dong-Harlow (ADH) framework~\cite{AlmheiriDongHarlow2015} established that bulk locality in AdS/CFT implements quantum error correction: logical (bulk) operators are encoded redundantly on the boundary. The HaPPY code~\cite{PastawskiYoshidaHarlowPreskill2015} made this concrete with tensor networks of perfect tensors reproducing the RT formula. Bentsen, Nguyen, and Swingle~\cite{BentsenNguyenSwingle2024} recently showed that approximate QEC codes arise from SYK ground states with code distance scaling as $N^{1/2}$, where the large distance arises from long wormhole geometry---directly connecting wormhole structure to error correction properties. The state-of-the-art NISQ demonstration by Granet et al.~\cite{QuantinuumSYK2025} simulated a sparsified SYK model with 24 Majorana fermions on Quantinuum's H1 trapped-ion system, establishing that meaningful quantum gravity simulations require systems significantly beyond the few-qubit regime.
 
 CFD's coherence attenuation relation $S_{\text{eff}}(\gamma) = S_0 e^{-\gamma/\gamma_c}$ may connect to QEC properties: as coherence degrades, the effective code distance of the holographic encoding could decrease, eventually reaching a threshold below which bulk operators cannot be reliably reconstructed. Establishing this connection rigorously---relating $\gamma_c$ to the code distance of CFD's information-geometric encoding---is an important direction for future work.
 
@@ -279,7 +279,7 @@ CFD's coherence attenuation relation $S_{\text{eff}}(\gamma) = S_0 e^{-\gamma/\g
 
 The program of deriving spacetime geometry from information geometry is well-motivated but faces fundamental limitations. Erdmenger, Grosvenor, and Jefferson~\cite{Erdmenger2020} demonstrated that Fisher metrics generically produce hyperbolic (AdS-like) geometry from Gaussian distributions. This raises the question of whether emergent AdS geometry from Fisher metrics reflects deep physics or mathematical structure. 
 
-Furthermore, the Fisher metric's uniqueness (Čencov's theorem) relies on assumptions that may be violated in quantum gravity regimes~\cite{Braunstein1994}. CFD is subject to this caution: the coherence-generated metric (Eq.~\ref{eq:metric}) may produce ``horizon-like'' degeneracy as a generic mathematical feature rather than a physically meaningful information boundary. Distinguishing these possibilities requires experiments that go beyond confirming the existence of a threshold (which standard quantum mechanics predicts) to testing predictions that are \emph{uniquely} geometric---such as the coherence-depth complementarity conjecture.
+Furthermore, the Fisher metric's uniqueness (\v{C}encov's theorem~\cite{Cencov1982}) relies on assumptions---in particular, monotonicity under Markov morphisms on classical probability simplices---that may be violated in quantum gravity regimes. CFD is subject to this caution: the coherence-generated metric (Eq.~\ref{eq:metric}) may produce ``horizon-like'' degeneracy as a generic mathematical feature rather than a physically meaningful information boundary. Distinguishing these possibilities requires experiments that go beyond confirming the existence of a threshold (which standard quantum mechanics predicts) to testing predictions that are \emph{uniquely} geometric---such as the coherence-depth complementarity conjecture.
 
 \subsection{Implications for Quantum Information}
 
@@ -341,7 +341,7 @@ A.~Almheiri, X.~Dong, and D.~Harlow, ``Bulk locality and quantum error correctio
 S.~Amari, \textit{Information Geometry and Its Applications}, Applied Mathematical Sciences \textbf{194}, Springer (2016).
 
 \bibitem{Arda2026companion}
-C.~Arda, ``Cross-platform noise thresholds in quantum teleportation: Trapped-ion and neutral-atom architectures,'' Preprint v5.0 (2026).
+C.~Arda, ``Cross-platform noise thresholds in quantum teleportation: Trapped-ion and neutral-atom architectures,'' Zenodo (2026). doi:10.5281/zenodo.XXXXX.
 
 \bibitem{Barcelo2011}
 C.~Barcel\'o, S.~Liberati, and M.~Visser, ``Analogue gravity,'' Living Rev.\ Rel.\ \textbf{14}, 3 (2011).
@@ -408,6 +408,9 @@ G.~Vidal, ``Entanglement renormalization,'' Phys.\ Rev.\ Lett.\ \textbf{99}, 220
 
 \bibitem{Zurek2003}
 W.~H.~Zurek, ``Decoherence, einselection, and the quantum origins of the classical,'' Rev.\ Mod.\ Phys.\ \textbf{75}, 715 (2003).
+
+\bibitem{Cencov1982}
+N.~N.~\v{C}encov, \textit{Statistical Decision Rules and Optimal Inference}, Translations of Mathematical Monographs \textbf{53}, American Mathematical Society (1982).
 
 \bibitem{HolographicDiscord2025}
 H.~Shapourian, R.~Miao, and S.~Ryu, ``Holographic quantum discord and entanglement wedge cross section,'' arXiv:2506.02131 (2025).
