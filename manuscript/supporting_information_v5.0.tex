@@ -210,7 +210,7 @@
 			0.40 & 79.0\% & 93.0\% & 2.84$\times$ & 19 \\
 			\bottomrule
 		\end{tabular}
-		\caption{FRESNEL\_CAN1 QPU hardware results (core 9-qubit extraction). The noise ratio quantifies $(1 - P_0^{\text{QPU}}) / (1 - P_0^{\text{ideal}})$.}
+		\caption{FRESNEL\_CAN1 QPU hardware results (core 9-qubit extraction). The noise ratio quantifies $(1 - P_0^{\text{QPU}}) / (1 - P_0^{\text{ideal}})$. Note: Ideal EMU\_FREE baseline values differ from Table~4 due to the reduced spectator atom count in the 22-atom QPU layout (vs.\ 42 atoms in the emulator configuration).}
 		\label{tab:si_qpu_results}
 	\end{table}
 	
@@ -365,17 +365,17 @@
 		\midrule
 		\endhead
 		\texttt{\small code/experiment\_1\_phase\_transition.py} & Dephasing sweep: varies $\gamma \in [0, 1]$ on IonQ simulator. \\
-		\texttt{\small code/wormhole\_pulser\_continuous.py} & Continuous-mode Pulser simulation of the Rydberg Hamiltonian. \\
+		\texttt{\small code/teleportation\_pulser\_continuous.py} & Continuous-mode Pulser simulation of the Rydberg Hamiltonian. \\
 		\texttt{\small scripts/tier1\_analysis.py} & Result aggregation and statistical analysis. \\
 		\texttt{\small scripts/tier1\_depth\_sweep.py} & Depth sweep: varies circuit size at fixed $\gamma$. \\
 		\texttt{\small scripts/tier1v3\_trotter\_sweep.py} & Trotter-step scaling: varies Trotter steps 1--8 on the 3-qubit architecture. \\
-		\texttt{\small scripts/wormhole\_control\_experiment.py} & Control: teleportation circuit without Bell pair. \\
-		\texttt{\small scripts/wormhole\_hardware\_correct.py} & Hardware-corrected protocol with classical post-processing. \\
-		\texttt{\small scripts/wormhole\_teleport\_local\_test.py} & Local teleportation experiment with shot-level analysis. \\
-		\texttt{\small scripts/wormhole\_teleport\_sweep.py} & Parameter sweep of teleportation fidelity. \\
+		\texttt{\small scripts/teleportation\_control\_experiment.py} & Control: teleportation circuit without Bell pair. \\
+		\texttt{\small scripts/teleportation\_hardware\_correct.py} & Hardware-corrected protocol with classical post-processing. \\
+		\texttt{\small scripts/teleportation\_local\_test.py} & Local teleportation experiment with shot-level analysis. \\
+		\texttt{\small scripts/teleportation\_sweep.py} & Parameter sweep of teleportation fidelity. \\
 		\texttt{\small scripts/plot\_azure\_data.py} & Plotting utilities for Azure Quantum results. \\
 		\texttt{\small scripts/trotter\_noisy\_corrected.py} & Local noisy Trotter sweep with IonQ Forte noise model. \\
-		\texttt{\small pasqal\_native/scripts/\newline run\_wormhole\_pasqal.py} & Pasqal Cloud submission: builds and submits sequences for $\gamma$ sweep. \\
+		\texttt{\small pasqal\_native/scripts/\newline run\_teleportation\_pasqal.py} & Pasqal Cloud submission: builds and submits sequences for $\gamma$ sweep. \\
 		\texttt{\small pasqal\_native/scripts/\newline run\_fine\_sweep.py} & Fine-grained $\gamma$ sweep near the threshold region. \\
 		\texttt{\small pasqal\_native/scripts/\newline run\_emulator\_comparison.py} & Cross-validation between \texttt{EMU\_FREE} and \texttt{EMU\_SV}. \\
 		\texttt{\small pasqal\_native/scripts/\newline analyze\_results.py} & Analysis and figure generation from emulator results. \\
