@@ -18,7 +18,7 @@ Trapped-Ion and Neutral-Atom Architectures}\\[0.3em]
 \small Independent Researcher\\
 \small \texttt{celal.arda@outlook.de}}
 
-\date{February 23, 2026}
+\date{\today}
 
 \begin{document}
 \maketitle
@@ -134,17 +134,17 @@ We performed a full $\gamma$ sweep ($0.0$ to $1.0$ in 20~steps) on the IonQ simu
 \begin{table}[h]
     \centering
     \small
-    \begin{tabular}{ccl}
+    \begin{tabular}{cccl}
         \toprule
-        $\gamma$ & Survival $P(|0\rangle)$ & Status \\
+        $\gamma$ & Survival $P(|0\rangle)^\dagger$ & Fidelity $F$ & Status \\
         \midrule
-        0.000 & 1.0000 & High fidelity \\
-        0.200 & 0.6500 & Degraded \\
-        0.400 & 0.0900 & Near-random \\
-        0.535 & 0.0100 & Collapsed \\
+        0.000 & 0.960 & 0.920 & High fidelity \\
+        0.200 & 0.600 & 0.200 & Near-random \\
+        0.400 & 0.450 & $-$0.100 & Below random \\
+        0.535 & 0.460 & $-$0.080 & Collapsed \\
         \bottomrule
     \end{tabular}
-    \caption{Teleportation survival probability vs.\ dephasing strength~$\gamma$.}
+    \caption{Teleportation survival probability and fidelity vs.\ dephasing strength~$\gamma$ (IonQ simulator, 100~shots per $\gamma$ point). $^\dagger$Survival $P(|0\rangle)$ is the probability that the output qubit is measured in the target state $|0\rangle$ after classical correction; teleportation fidelity is $F = 2P(|0\rangle) - 1$. At $\gamma = 0$, $P(|0\rangle) = 0.96$ corresponds to $F = 0.92$, consistent with SI Table~S1.}
     \label{tab:survival}
 \end{table}
 
@@ -158,7 +158,7 @@ The neutral-atom implementation reveals a \emph{steeper} fidelity degradation th
 \begin{figure*}[t]
     \centering
     \includegraphics[width=0.95\textwidth]{figures/fig4_combined_panel.pdf}
-    \caption{Pasqal neutral-atom results. (a)~Mean Rydberg density $\langle n \rangle$ drops as dephasing increases. (b)~Ground state probability $P_0$ shows a rapid transition between $\gamma = 0.15$ and $0.30$. (c)~Shannon entropy confirms loss of state diversity. (d)~Per-qubit excitation heatmap.}
+    \caption{Pasqal neutral-atom results. (a)~Mean Rydberg density $\langle n \rangle$ drops as dephasing increases. (b)~Ground state probability $P_0$ shows a rapid transition between $\gamma = 0.15$ and $0.30$ (note: the panel title ``Fidelity Collapse'' refers to the analog equivalent of fidelity loss; the y-axis quantity is $P_0$, not teleportation fidelity $F$ as defined in Eq.~\ref{eq:fidelity}). (c)~Shannon entropy confirms loss of state diversity. (d)~Per-qubit excitation heatmap.}
     \label{fig:pasqal_results}
 \end{figure*}
 
@@ -237,7 +237,7 @@ To complete the four-tier validation---idealized simulation $\to$ exact solver $
         0.40 & 93.0\% & 89.4\% & 79.0\% & 0.026 & 2.84$\times$ \\
         \bottomrule
     \end{tabular}
-    \caption{FRESNEL\_CAN1 QPU results (22~atoms, 9~core qubits, 500~shots per point). Noise ratio = $(1-P_0^{\text{QPU}})/(1-P_0^{\text{ideal}})$; values near 1.0 indicate ideal behavior.}
+    \caption{FRESNEL\_CAN1 QPU results (22~atoms, 9~core qubits, 500~shots per point). Noise ratio = $(1-P_0^{\text{QPU}})/(1-P_0^{\text{ideal}})$; values near 1.0 indicate ideal behavior. Note: \texttt{EMU\_FREE} baseline values differ from Table~4 because this 22-atom register contains fewer spectator atoms than the 42-atom emulator layout used for the full sweep.}
     \label{tab:fresnel_can1}
 \end{table}
 
