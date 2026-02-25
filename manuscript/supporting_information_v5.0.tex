@@ -12,6 +12,11 @@
 \usepackage{listings}
 \geometry{margin=1in}
 
+% Prefix SI equation numbers with 'S'
+\renewcommand{\theequation}{S\arabic{equation}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
 \lstset{
 	basicstyle=\ttfamily\small,
 	breaklines=true,
@@ -28,7 +33,7 @@
 	\small Independent Researcher\\
 	\small \texttt{celal.arda@outlook.de}}
 
-\date{February 2026}
+\date{\today}
 
 \begin{document}
 	\maketitle
@@ -157,6 +162,8 @@
 	
 	\subsection{Pasqal Neutral-Atom --- Full Sweep Data}
 	
+	Table~\ref{tab:si_pasqal_sweep} presents the fine-grained dephasing sweep on the Pasqal neutral-atom platform using the \texttt{EMU\_FREE} emulator (42-atom layout, 8 $\gamma$ points $\times$ 500 shots = 4\,000 total shots). The transition region is clearly resolved between $\gamma = 0.15$ and $\gamma = 0.25$.
+
 	\begin{table}[h]
 		\centering
 		\small
@@ -180,6 +187,8 @@
 	
 	\subsection{Emulator Cross-Validation}
 	
+	To verify simulation accuracy, we cross-validated the \texttt{EMU\_FREE} results against exact state-vector simulation (\texttt{EMU\_SV}) at three representative checkpoints. Table~\ref{tab:si_emulator_validation} confirms agreement within 1.5\% at all checkpoints, establishing that the computationally efficient \texttt{EMU\_FREE} backend faithfully reproduces the quantum dynamics.
+
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{cccc}
@@ -210,7 +219,7 @@
 			0.40 & 79.0\% & 93.0\% & 2.84$\times$ & 19 \\
 			\bottomrule
 		\end{tabular}
-		\caption{FRESNEL\_CAN1 QPU hardware results (core 9-qubit extraction). The noise ratio quantifies $(1 - P_0^{\text{QPU}}) / (1 - P_0^{\text{ideal}})$. Note: Ideal EMU\_FREE baseline values differ from Table~4 due to the reduced spectator atom count in the 22-atom QPU layout (vs.\ 42 atoms in the emulator configuration).}
+		\caption{FRESNEL\_CAN1 QPU hardware results (core 9-qubit extraction). The noise ratio quantifies $(1 - P_0^{\text{QPU}}) / (1 - P_0^{\text{ideal}})$. Note: Ideal EMU\_FREE baseline values differ from Table~\ref{tab:si_pasqal_sweep} due to the reduced spectator atom count in the 22-atom QPU layout (vs.\ 42 atoms in the emulator configuration).}
 		\label{tab:si_qpu_results}
 	\end{table}
 	
@@ -226,6 +235,8 @@
 	\section{Hardware Platform Specifications}
 	\label{sec:hardware_specs}
 	
+	Table~\ref{tab:si_platforms} summarizes the specifications of both quantum platforms used in this study.
+
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{ll}
@@ -303,7 +314,7 @@
 	The neutral-atom simulation uses the Pulser framework to define atom registers and laser pulse sequences. The atoms are arranged in a linear chain with inter-atomic spacing tuned to achieve Rydberg blockade:
 	
 	\begin{itemize}
-		\item \textbf{Register:} 3 atoms at spacing $d = 6\,\mu\text{m}$ (within blockade radius $R_b \approx 9\,\mu\text{m}$).
+		\item \textbf{Register:} 3 atoms at spacing $d = 6\,\mu\text{m}$ (within blockade radius $R_b \approx 9\,\mu\text{m}$). This minimal configuration was used for local validation and pedagogical demonstrations. Production emulator sweeps (Tables~S3--S4) use 42-atom registers, and the FRESNEL\_CAN1 QPU runs (Table~S5) use 22-atom registers with 9 core qubits.
 		\item \textbf{Channel:} Global Rydberg channel with $\Omega_{\max} = 2\pi \times 4\,\text{MHz}$.
 		\item \textbf{Dephasing injection:} Detuning ramp $\Delta(\gamma)$ applied after entangling pulse.
 		\item \textbf{Measurement:} Final state sampled from the ground/Rydberg basis.

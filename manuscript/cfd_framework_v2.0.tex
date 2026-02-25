@@ -22,7 +22,7 @@ An Information-Geometric Framework for Quantum Decoherence\\with Hardware Valida
 \small Independent Researcher, Computational Foundations of Quantum Gravity\\
 \small \texttt{celal.arda@outlook.de}}
 
-\date{February 24, 2026}
+\date{\today}
 
 \begin{document}
 \maketitle
@@ -44,7 +44,7 @@ The holographic principle, formalized through the AdS/CFT correspondence~\cite{M
 \end{equation}
 relates entanglement entropy to minimal bulk surface area. Multiscale Entanglement Renormalization Ansatz (MERA) tensor networks~\cite{Vidal2007, Swingle2012} provide a discrete realization, mapping renormalization group flow to holographic depth~\cite{Beny2013, Evenbly2015}.
 
-However, standard holography treats entanglement entropy as the \emph{primary} quantum information observable. Quantum coherence---the off-diagonal density matrix elements---remains geometrically uninterpreted, despite being a quantifiable resource under incoherent operations~\cite{Streltsov2017, Baumgratz2014}. Recent work has constructed holographic duals of quantum \emph{discord} using the entanglement wedge cross-section~\cite{HolographicDiscord2025}, but discord is distinct from coherence: discord quantifies non-classical correlations, while coherence quantifies superposition. No published work assigns a geometric meaning to coherence monotones ($l_1$-norm, relative entropy of coherence) in AdS/CFT. This omission is significant: two quantum states can share identical entanglement entropy yet differ dramatically in their coherence properties, suggesting that entanglement entropy alone cannot fully encode the geometry of information space.
+However, standard holography treats entanglement entropy as the \emph{primary} quantum information observable. Quantum coherence---the off-diagonal density matrix elements---remains geometrically uninterpreted, despite being a quantifiable resource under incoherent operations~\cite{Streltsov2017, Baumgratz2014}. Recent work has constructed holographic duals of quantum \emph{discord} using the entanglement wedge cross-section~\cite{HolographicDiscord2025}, but discord is distinct from coherence: discord quantifies non-classical correlations, while coherence quantifies superposition. To our knowledge, no published work assigns a geometric meaning to coherence monotones ($l_1$-norm, relative entropy of coherence) in AdS/CFT. This omission is significant: two quantum states can share identical entanglement entropy yet differ dramatically in their coherence properties, suggesting that entanglement entropy alone cannot fully encode the geometry of information space.
 
 \textit{A note on resource independence:} While coherence and entanglement are independently \emph{quantifiable} as resources, they are not fully independent: coherence is a necessary ingredient for entanglement generation, and the two are interconvertible under local incoherent operations~\cite{Streltsov2015}. CFD exploits their independent \emph{geometric} roles---entanglement encoding connectivity, coherence encoding depth---not a claim of operational independence.
 
@@ -107,7 +107,7 @@ We present the following variational structure not as a derivation but to demons
 \begin{equation}
     S = \int d^4x \sqrt{-g}\left[\frac{c^4}{16\pi G}\mathcal{R} + \mathcal{L}_{\text{coherence}}\right]
 \end{equation}
-where the coherence Lagrangian is:
+The 4D integral and physical metric $g_{\mu\nu}$ are distinct from the 2D information-geometric parameter space $(p, \gamma)$; the action provides a template for how coherence-sourced stress-energy \emph{would} modify spacetime geometry if a microscopic embedding were established, where the coherence Lagrangian is:
 \begin{equation}
     \mathcal{L}_{\text{coherence}} = \tfrac{1}{2} F^{\mu\nu}(\partial_\mu\phi)(\partial_\nu\phi) - V(\phi, \mathrm{Tr}(F))
 \end{equation}
@@ -205,11 +205,11 @@ CFD produces five distinct testable predictions, summarized in Table~\ref{tab:pr
         1 & Coherence-depth complementarity & Open & Fixed-$S(\rho)$, variable-$\phi$ state comparison \\
         2 & MERA-decoherence correspondence & Open & $\gamma_{\text{eff}}(k)$ extraction from partial tomography \\
         3 & Entropy attenuation $S_{\text{eff}}(\gamma)$ & Open & Entanglement witnesses at multiple $\gamma$ \\
-        4 & Parametric geometry evolution & Open & Metric determinant tracking as $\gamma$ increases \\
+        4 & Parametric geometry evolution & Preliminary$^*$ & Metric determinant tracking as $\gamma$ increases \\
         5 & Coherence-information decoupling & Open & Entanglement persistence at $\gamma \approx \gamma_c$ \\
         \bottomrule
     \end{tabular}
-    \caption{Five open predictions of CFD and proposed experimental tests. All are accessible on current NISQ hardware.}
+    \caption{Five predictions of CFD and proposed experimental tests. All are accessible on current NISQ hardware. $^*$Companion data~\cite{Arda2026companion} show consistency with threshold behavior, but results are also consistent with standard noise models.}
     \label{tab:predictions}
 \end{table*}
 
@@ -235,7 +235,7 @@ CFD predicts a sharp distinction between entanglement persistence and informatio
 Near $\gamma_c$, quantum correlations (entanglement) can persist while coherence-mediated information transfer ceases. Specifically, $S(\rho) > 0$ while information accessibility $\to 0$ at $\gamma = \gamma_c$.
 \end{conjecture}
 
-This prediction is supported by noiseless state-vector simulation at $\gamma = 0.533 \approx \gamma_c$: the metric determinant $|\det(g)| = 0.0044$ (near-degenerate), yet quantum fidelity $F = 0.734$ remains super-classical ($F > 0.5$). Coherence and entanglement exhibit distinct scaling behaviors near the critical threshold.
+This prediction is supported by noiseless state-vector simulation of the 3-qubit teleportation circuit at $\gamma = 0.533 \approx \gamma_c$: the metric determinant $|\det(g)| = 0.0044$ (near-degenerate), yet the internal bipartite Bell state fidelity $F_{\text{Bell}} = 0.734$ remains super-classical ($F > 0.5$). Note that this measures the entanglement of the Bell bridge itself, not the teleportation fidelity (which approaches zero at the same $\gamma$); the distinction between these two fidelities is precisely the decoupling that Conjecture~3 predicts.
 
 % ============================================================
 \section{Relationship to Existing Work}
@@ -265,7 +265,7 @@ Table~\ref{tab:comparison} summarizes the key differences between CFD and standa
 
 \subsection{The Danielson-Satishchandran-Wald Paradigm}
 
-A major body of recent work establishes that horizons fundamentally \emph{cause} decoherence in nearby quantum systems. Satishchandran et al.~\cite{DSW2024} showed that any Killing horizon decoheres quantum superpositions at a constant rate via entanglement with interior degrees of freedom. This establishes a direction: horizons $\to$ decoherence.
+A major body of recent work establishes that horizons fundamentally \emph{cause} decoherence in nearby quantum systems. The DSW program~\cite{DSW2022, DSW2024} showed that any Killing horizon decoheres quantum superpositions at a constant rate via entanglement with interior degrees of freedom. This establishes a direction: horizons $\to$ decoherence.
 
 CFD proposes the conceptual inverse: coherence loss $\to$ effective information horizons. These directions are not necessarily contradictory---they may be complementary descriptions of the coherence-geometry interface. In the DSW paradigm, \emph{physical} horizons produce \emph{physical} decoherence. In CFD, loss of coherence in the \emph{information-geometric} parameter space produces \emph{effective} horizons (metric degeneracy). Whether these are two faces of the same phenomenon or merely a formal analogy remains an open question requiring rigorous investigation.
 
@@ -301,6 +301,8 @@ If the open predictions are validated, CFD would establish:
     \item \textbf{Non-injectivity of Fisher metrics:} The map from physical systems to information geometry is not injective~\cite{Erdmenger2020}; different physical configurations can produce identical metrics.
     \item \textbf{Falsifiability:} CFD's entropy attenuation predicts $S_{\text{eff}}(\gamma) = S_0 e^{-\gamma/\gamma_c}$ (exponential suppression). Standard dephasing channels produce polynomial decay of off-diagonal elements: $\rho_{ij}(\gamma) \propto (1 - \gamma)^n$ for $n$-qubit systems. Measuring the functional form of accessible entropy versus $\gamma$ could distinguish these; exponential rather than polynomial suppression would be a signature unique to the geometric interpretation. This remains the critical open test.
     \item \textbf{Small-system limitations:} The Jafferis et al.~\cite{Jafferis2022} traversable wormhole experiment demonstrated that small quantum systems (7 qubits) face legitimacy challenges for holographic claims~\cite{KobrinYao2023}. CFD's proposed experiments on 3--5 qubit systems face analogous objections. While we do not claim these experiments probe holographic geometry directly, the proposed tests must be interpreted with appropriate caution regarding the small-system regime.
+    \item \textbf{Unitary vs.\ irreversible decoherence:} The companion experimental work~\cite{Arda2026companion} uses \emph{unitary} parametric dephasing ($R_z$ rotations), which is exactly reversible, whereas the CFD framework models \emph{irreversible} decoherence. The observed threshold behavior is consistent with CFD predictions, but a stronger test would use genuinely irreversible noise channels (e.g., amplitude damping) where the analogy to information loss is physically grounded.
+    \item \textbf{Platform-dependent $\gamma_c$:} The companion work~\cite{Arda2026companion} finds $\gamma_c \approx 0.535$ on the IonQ gate-based platform and $\gamma_c \in [0.15, 0.30]$ on Pasqal's neutral-atom platform. This platform dependence is expected under CFD, since $\gamma_c$ depends on the system geometry (Eq.~\ref{eq:gamma_c}), but it also means that $\gamma_c$ is not a universal constant.
 \end{enumerate}
 
 \subsection{Proposed Experiments for Open Predictions}
@@ -326,7 +328,7 @@ Key contributions of this work:
     \item \textbf{Critical engagement:} Explicit identification of limitations, including the non-injectivity of Fisher metrics, the ad hoc nature of the gravitational coupling, and the need for falsifiable unique predictions.
 \end{enumerate}
 
-The framework's distinguishing feature is testability: unlike approaches that require Planck-scale energies or astronomical observations, CFD predictions can be probed with quantum simulators. However, we emphasize that testability alone does not establish validity---the critical next step is identifying an experimental outcome that is predicted by CFD but \emph{not} by standard quantum mechanics. We offer this framework as a conjecture worthy of investigation, not as an established result.
+The framework's distinguishing feature is testability: unlike approaches that require Planck-scale energies or astronomical observations, CFD predictions can be probed with quantum simulators. The most decisive near-term test is the entropy attenuation functional form: measuring $S_{\text{eff}}(\gamma)$ across a dense sweep and fitting to both the CFD exponential $S_0 e^{-\gamma/\gamma_c}$ and the standard dephasing polynomial $(1-\gamma)^n$ would provide---for the first time---a quantitative discriminator between CFD and standard dephasing models.
 
 \section*{Acknowledgments}
 
@@ -341,7 +343,7 @@ A.~Almheiri, X.~Dong, and D.~Harlow, ``Bulk locality and quantum error correctio
 S.~Amari, \textit{Information Geometry and Its Applications}, Applied Mathematical Sciences \textbf{194}, Springer (2016).
 
 \bibitem{Arda2026companion}
-C.~Arda, ``Cross-platform noise thresholds in quantum teleportation: Trapped-ion and neutral-atom architectures,'' Zenodo (2026). doi:10.5281/zenodo.XXXXX.
+C.~Arda, ``Cross-platform noise thresholds in quantum teleportation: Trapped-ion and neutral-atom architectures,'' Zenodo (2026). doi:10.5281/zenodo.18743497.
 
 \bibitem{Barcelo2011}
 C.~Barcel\'o, S.~Liberati, and M.~Visser, ``Analogue gravity,'' Living Rev.\ Rel.\ \textbf{14}, 3 (2011).
@@ -363,6 +365,9 @@ H.-P.~Breuer and F.~Petruccione, \textit{The Theory of Open Quantum Systems}, Ox
 
 \bibitem{Caticha2005}
 A.~Caticha, ``Entropic dynamics,'' AIP Conference Proceedings \textbf{803}, 302 (2005).
+
+\bibitem{DSW2022}
+B.~S.~Danielson, G.~Satishchandran, and R.~M.~Wald, ``Killing horizons decohere quantum superpositions,'' Phys.\ Rev.\ Lett.\ \textbf{128}, 170401 (2022).
 
 \bibitem{DSW2024}
 B.~S.~Danielson, G.~Satishchandran, and R.~M.~Wald, ``Gravitationally mediated entanglement: Newtonian field vs.\ gravitons,'' Phys.\ Rev.\ D \textbf{109}, 065031 (2024).
