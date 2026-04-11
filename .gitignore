@@ -60,3 +60,8 @@ manuscript/supporting_information.pdf
 manuscript/references_cfd.bib
 submission_njp/
 supporting_info/
+scripts/*results*
+scripts/debug_*
+scripts/test_*
+scripts/inspect_*
+scripts/TIER1_README.md
